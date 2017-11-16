@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_buildings"
+            android:title="Buildings" />
+        <item
+            android:id="@+id/nav_civilizations"
+            android:title="Civilizations" />
+        <item
+            android:id="@+id/nav_land_improvements"
+            android:title="Land Improvements" />
+        <item
+            android:id="@+id/nav_religion"
+            android:title="Religion" />
+        <item
+            android:id="@+id/nav_resources"
+            android:title="Resources" />
+        <item
+            android:id="@+id/nav_social_policies"
+            android:title="Social Policies" />
+        <item
+            android:id="@+id/nav_technologies"
+            android:title="Technologies" />
+        <item
+            android:id="@+id/nav_terrain"
+            android:title="Terrain" />
+        <item
+            android:id="@+id/nav_units"
+            android:title="Units" />
+        <item
+            android:id="@+id/nav_victory_conditions"
+            android:title="Victory Conditions" />
+        <item
+            android:id="@+id/nav_wonders"
+            android:title="Wonders" />
+    </group>
+
+</menu>
