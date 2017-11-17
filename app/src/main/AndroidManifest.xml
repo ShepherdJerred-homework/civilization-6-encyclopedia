@@ -22,7 +22,11 @@
         <activity
             android:name=".BuildingListActivity"
             android:label="@string/title_building_list"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shepherdjerred.civilopedia.MainActivity" />
+        </activity>
         <activity
             android:name=".BuildingDetailActivity"
             android:label="@string/title_building_detail"
@@ -35,7 +39,11 @@
         <activity
             android:name=".UnitListActivity"
             android:label="@string/title_unit_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shepherdjerred.civilopedia.MainActivity" />
+        </activity>
         <activity
             android:name=".UnitDetailActivity"
             android:label="@string/title_unit_detail"
@@ -44,6 +52,24 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shepherdjerred.civilopedia.UnitListActivity" />
+        </activity>
+        <activity
+            android:name=".CivilizationListActivity"
+            android:label="@string/title_civilization_list"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shepherdjerred.civilopedia.MainActivity" />
+        </activity>
+        <activity
+            android:name=".CivilizationDetailActivity"
+            android:label="@string/title_civilization_detail"
+            android:parentActivityName=".CivilizationListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shepherdjerred.civilopedia.CivilizationListActivity" />
         </activity>
     </application>
 

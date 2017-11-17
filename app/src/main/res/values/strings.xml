@@ -10,4 +10,6 @@
     <string name="title_building_detail">Building Detail</string>
     <string name="title_unit_list">Units</string>
     <string name="title_unit_detail">Unit Detail</string>
+    <string name="title_civilization_list">Civilizations</string>
+    <string name="title_civilization_detail">Civilization Detail</string>
 </resources>

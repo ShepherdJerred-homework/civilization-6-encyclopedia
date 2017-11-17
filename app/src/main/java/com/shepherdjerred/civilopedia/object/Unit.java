@@ -11,6 +11,7 @@ import lombok.Data;
 public class Unit implements Parcelable {
     private String unitType;
     private String name;
+    private String description;
 
 
     @Override
@@ -22,14 +23,16 @@ public class Unit implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.unitType);
         dest.writeString(this.name);
+        dest.writeString(this.description);
     }
 
     protected Unit(Parcel in) {
         this.unitType = in.readString();
         this.name = in.readString();
+        this.description = in.readString();
     }
 
-    public static final Parcelable.Creator<Unit> CREATOR = new Parcelable.Creator<Unit>() {
+    public static final Creator<Unit> CREATOR = new Creator<Unit>() {
         @Override
         public Unit createFromParcel(Parcel source) {
             return new Unit(source);

@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_units) {
             Intent intent = new Intent(this, UnitListActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_civilizations) {
+            Intent intent = new Intent(this, CivilizationListActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

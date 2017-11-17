@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -44,6 +45,12 @@ public class UnitListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
+        // Show the Up button in the action bar.
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         if (findViewById(R.id.unit_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -62,13 +69,14 @@ public class UnitListActivity extends AppCompatActivity {
         CivilopediaDatabase civilopediaDatabase = new CivilopediaDatabase(getApplicationContext());
         SQLiteDatabase sqLiteDatabase = civilopediaDatabase.getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Units", null);
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Units ORDER BY Name", null);
         if (c.moveToFirst()) {
             do {
                 String unitType = c.getString(0);
                 String name = c.getString(1);
+                String description = c.getString(24);
 
-                Unit unit = new Unit(unitType, name);
+                Unit unit = new Unit(unitType, name, description);
                 units.add(unit);
 
             } while (c.moveToNext());

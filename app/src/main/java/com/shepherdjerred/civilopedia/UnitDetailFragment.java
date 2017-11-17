@@ -39,7 +39,7 @@ public class UnitDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.unit_detail, container, false);
 
         if (mUnit != null) {
-            ((TextView) rootView.findViewById(R.id.unit_detail)).setText(mUnit.getName());
+            ((TextView) rootView.findViewById(R.id.description)).setText(mUnit.getDescription());
         }
 
         return rootView;
