@@ -41,8 +41,8 @@ public class CivilizationDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(CivilizationDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(CivilizationDetailFragment.ARG_ITEM_ID));
+            arguments.putParcelable(CivilizationDetailFragment.ARG_ITEM_ID,
+                    getIntent().getParcelableExtra(CivilizationDetailFragment.ARG_ITEM_ID));
             CivilizationDetailFragment fragment = new CivilizationDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
