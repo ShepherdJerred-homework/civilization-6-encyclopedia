@@ -13,7 +13,7 @@ import com.shepherdjerred.civilopedia.object.Building;
 
 public class BuildingDetailFragment extends Fragment {
 
-    public static final String ARG_ITEM = "item";
+    public static final String ARG_ITEM = "building";
     private Building mBuilding;
 
     public BuildingDetailFragment() {
@@ -25,7 +25,6 @@ public class BuildingDetailFragment extends Fragment {
 
         if (getArguments().containsKey(ARG_ITEM)) {
             mBuilding = getArguments().getParcelable(ARG_ITEM);
-
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
@@ -40,20 +39,20 @@ public class BuildingDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.building_detail, container, false);
 
         if (mBuilding != null) {
-            ((TextView) rootView.findViewById(R.id.prereq_tech)).setText("Prerequisite technology: " + mBuilding.getPrereqTech());
-            ((TextView) rootView.findViewById(R.id.prereq_civic)).setText("Prerequisite civics: " + mBuilding.getPrereqCivic());
+            ((TextView) rootView.findViewById(R.id.prereq_tech)).setText("Technology: " + mBuilding.getPrereqTech());
+            ((TextView) rootView.findViewById(R.id.prereq_civic)).setText("Civic: " + mBuilding.getPrereqCivic());
             ((TextView) rootView.findViewById(R.id.cost)).setText("Production cost: " + mBuilding.getCost());
-            ((TextView) rootView.findViewById(R.id.capital)).setText("Requirements: " + mBuilding.isCapital());
-            ((TextView) rootView.findViewById(R.id.prereq_district)).setText("Prerequisite district: " + mBuilding.getPrereqDistrict());
+            ((TextView) rootView.findViewById(R.id.capital)).setText("City must be capital: " + mBuilding.isCapital());
+            ((TextView) rootView.findViewById(R.id.prereq_district)).setText("District: " + mBuilding.getPrereqDistrict());
             ((TextView) rootView.findViewById(R.id.description)).setText("Description: " + mBuilding.getDescription());
-            ((TextView) rootView.findViewById(R.id.outer_defense_hit_points)).setText("Outer defense hit points: " + mBuilding.getOuterDefenseHitPoints());
+            ((TextView) rootView.findViewById(R.id.outer_defense_hit_points)).setText("Hit points: " + mBuilding.getOuterDefenseHitPoints());
             ((TextView) rootView.findViewById(R.id.housing)).setText(String.valueOf("Housing: " + mBuilding.getHousing()));
             ((TextView) rootView.findViewById(R.id.entertainment)).setText("Entertainment: " + mBuilding.getEntertainment());
             ((TextView) rootView.findViewById(R.id.maintenance)).setText("Maintenance: " + mBuilding.getMaintenance());
             ((TextView) rootView.findViewById(R.id.trait_type)).setText("Trait type: " + mBuilding.getTraitType());
-            ((TextView) rootView.findViewById(R.id.outer_defense_strength)).setText("Outer defense strength: " + mBuilding.getOuterDefenseStrength());
+            ((TextView) rootView.findViewById(R.id.outer_defense_strength)).setText("Strength: " + mBuilding.getOuterDefenseStrength());
             ((TextView) rootView.findViewById(R.id.citizen_slots)).setText("Citizen slots: " + mBuilding.getCitizenSlots());
-            ((TextView) rootView.findViewById(R.id.requires_adj_river)).setText("Requires adjacent river: " + mBuilding.isRequiresAdjacentRiver());
+            ((TextView) rootView.findViewById(R.id.requires_adj_river)).setText("Adjacent river: " + mBuilding.isRequiresAdjacentRiver());
         }
 
         return rootView;

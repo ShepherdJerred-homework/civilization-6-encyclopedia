@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_buildings) {
             Intent intent = new Intent(this, BuildingListActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_units) {
+            Intent intent = new Intent(this, UnitListActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

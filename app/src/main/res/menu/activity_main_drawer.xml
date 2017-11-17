@@ -8,38 +8,53 @@
             android:id="@+id/nav_home"
             android:title="Home" />
         <item
-            android:id="@+id/nav_buildings"
-            android:title="Buildings" />
-        <item
             android:id="@+id/nav_civilizations"
             android:title="Civilizations" />
         <item
-            android:id="@+id/nav_land_improvements"
-            android:title="Land Improvements" />
+            android:id="@+id/nav_leaders"
+            android:title="Leaders" />
         <item
-            android:id="@+id/nav_religion"
-            android:title="Religion" />
+            android:id="@+id/nav_city_states"
+            android:title="City States" />
         <item
-            android:id="@+id/nav_resources"
-            android:title="Resources" />
+            android:id="@+id/nav_districts"
+            android:title="Districts" />
         <item
-            android:id="@+id/nav_social_policies"
-            android:title="Social Policies" />
+            android:id="@+id/nav_buildings"
+            android:title="Buildings" />
         <item
-            android:id="@+id/nav_technologies"
-            android:title="Technologies" />
-        <item
-            android:id="@+id/nav_terrain"
-            android:title="Terrain" />
+            android:id="@+id/nav_wonders_projects"
+            android:title="Wonders and Projects" />
         <item
             android:id="@+id/nav_units"
             android:title="Units" />
         <item
-            android:id="@+id/nav_victory_conditions"
-            android:title="Victory Conditions" />
+            android:id="@+id/nav_unit_promotions"
+            android:title="Unit Promotions" />
         <item
-            android:id="@+id/nav_wonders"
-            android:title="Wonders" />
+            android:id="@+id/nav_great_people"
+            android:title="Great People" />
+        <item
+            android:id="@+id/nav_technologies"
+            android:title="Technologies" />
+        <item
+            android:id="@+id/nav_civics"
+            android:title="Civics" />
+        <item
+            android:id="@+id/nav_governments_policies"
+            android:title="Governments and Policies" />
+        <item
+            android:id="@+id/nav_religion"
+            android:title="Religions" />
+        <item
+            android:id="@+id/nav_terrain"
+            android:title="Terrain and Features" />
+        <item
+            android:id="@+id/nav_resources"
+            android:title="Resources" />
+        <item
+            android:id="@+id/nav_improvements_routes"
+            android:title="Improvements and Routes" />
     </group>
 
 </menu>
