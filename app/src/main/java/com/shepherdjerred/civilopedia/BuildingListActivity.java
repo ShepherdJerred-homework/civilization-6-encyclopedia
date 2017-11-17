@@ -63,7 +63,7 @@ public class BuildingListActivity extends AppCompatActivity {
         CivilopediaDatabase civilopediaDatabase = new CivilopediaDatabase(getApplicationContext());
         SQLiteDatabase sqLiteDatabase = civilopediaDatabase.getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Buildings", null);
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Buildings WHERE IsWonder == 0", null);
         if (c.moveToFirst()) {
             do {
                 String buildingType = c.getString(0);
