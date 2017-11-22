@@ -12,8 +12,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.shepherdjerred.civilopedia.activities.building.BuildingListActivity;
+import com.shepherdjerred.civilopedia.activities.citystate.CityStateListActivity;
+import com.shepherdjerred.civilopedia.activities.civic.CivicListActivity;
 import com.shepherdjerred.civilopedia.activities.civilization.CivilizationListActivity;
+import com.shepherdjerred.civilopedia.activities.district.DistrictListActivity;
+import com.shepherdjerred.civilopedia.activities.feature.FeatureListActivity;
+import com.shepherdjerred.civilopedia.activities.government.GovernmentListActivity;
+import com.shepherdjerred.civilopedia.activities.greatperson.GreatPersonListActivity;
+import com.shepherdjerred.civilopedia.activities.improvement.ImprovementListActivity;
+import com.shepherdjerred.civilopedia.activities.leader.LeaderListActivity;
+import com.shepherdjerred.civilopedia.activities.policy.PolicyListActivity;
+import com.shepherdjerred.civilopedia.activities.project.ProjectListActivity;
+import com.shepherdjerred.civilopedia.activities.religion.ReligionListActivity;
+import com.shepherdjerred.civilopedia.activities.resource.ResourceListActivity;
+import com.shepherdjerred.civilopedia.activities.route.RouteListActivity;
+import com.shepherdjerred.civilopedia.activities.terrain.TerrainListActivity;
 import com.shepherdjerred.civilopedia.activities.unit.UnitListActivity;
+import com.shepherdjerred.civilopedia.activities.unitpromotion.UnitPromotionListActivity;
+import com.shepherdjerred.civilopedia.activities.wonder.WonderListActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,15 +87,51 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        // TODO Handle click for all options
-        if (id == R.id.nav_buildings) {
-            Intent intent = new Intent(this, BuildingListActivity.class);
-            startActivity(intent);
+        Intent intent = null;
+
+        if (id == R.id.nav_civilizations) {
+            intent = new Intent(this, CivilizationListActivity.class);
+        } else if (id == R.id.nav_leaders) {
+            intent = new Intent(this, LeaderListActivity.class);
+        } else if (id == R.id.nav_city_states) {
+            intent = new Intent(this, CityStateListActivity.class);
+        } else if (id == R.id.nav_districts) {
+            intent = new Intent(this, DistrictListActivity.class);
+        } else if (id == R.id.nav_buildings) {
+            intent = new Intent(this, BuildingListActivity.class);
+        } else if (id == R.id.nav_wonders) {
+            intent = new Intent(this, WonderListActivity.class);
+        } else if (id == R.id.nav_projects) {
+            intent = new Intent(this, ProjectListActivity.class);
         } else if (id == R.id.nav_units) {
-            Intent intent = new Intent(this, UnitListActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_civilizations) {
-            Intent intent = new Intent(this, CivilizationListActivity.class);
+            intent = new Intent(this, UnitListActivity.class);
+        } else if (id == R.id.nav_unit_promotions) {
+            intent = new Intent(this, UnitPromotionListActivity.class);
+        } else if (id == R.id.nav_great_people) {
+            intent = new Intent(this, GreatPersonListActivity.class);
+        } else if (id == R.id.nav_technologies) {
+            intent = new Intent(this, TerrainListActivity.class);
+        } else if (id == R.id.nav_civics) {
+            intent = new Intent(this, CivicListActivity.class);
+        } else if (id == R.id.nav_governments) {
+            intent = new Intent(this, GovernmentListActivity.class);
+        } else if (id == R.id.nav_policies) {
+            intent = new Intent(this, PolicyListActivity.class);
+        } else if (id == R.id.nav_religion) {
+            intent = new Intent(this, ReligionListActivity.class);
+        } else if (id == R.id.nav_terrain) {
+            intent = new Intent(this, TerrainListActivity.class);
+        } else if (id == R.id.nav_features) {
+            intent = new Intent(this, FeatureListActivity.class);
+        } else if (id == R.id.nav_resources) {
+            intent = new Intent(this, ResourceListActivity.class);
+        } else if (id == R.id.nav_improvements) {
+            intent = new Intent(this, ImprovementListActivity.class);
+        } else if (id == R.id.nav_routes) {
+            intent = new Intent(this, RouteListActivity.class);
+        }
+
+        if (intent != null) {
             startActivity(intent);
         }
 

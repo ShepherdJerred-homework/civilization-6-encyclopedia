@@ -23,6 +23,8 @@ import com.shepherdjerred.civilopedia.activities.resource.dummy.DummyContent;
 
 import java.util.List;
 
+import static android.support.v4.app.NavUtils.navigateUpFromSameTask;
+
 /**
  * An activity representing a list of Resources. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -99,7 +101,7 @@ public class ResourceListActivity extends AppCompatActivity {
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final ItemListActivity mParentActivity;
+        private final ResourceListActivity mParentActivity;
         private final List<DummyContent.DummyItem> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {

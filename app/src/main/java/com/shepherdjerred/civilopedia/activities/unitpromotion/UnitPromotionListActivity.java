@@ -23,6 +23,8 @@ import com.shepherdjerred.civilopedia.activities.unitpromotion.dummy.DummyConten
 
 import java.util.List;
 
+import static android.support.v4.app.NavUtils.navigateUpFromSameTask;
+
 /**
  * An activity representing a list of Unit Promotions. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -99,7 +101,7 @@ public class UnitPromotionListActivity extends AppCompatActivity {
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final ItemListActivity mParentActivity;
+        private final UnitPromotionListActivity mParentActivity;
         private final List<DummyContent.DummyItem> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {

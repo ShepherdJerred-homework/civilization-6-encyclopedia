@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.shepherdjerred.civilopedia.R;
+
 public class UnitDetailFragment extends Fragment {
 
     public static final String ARG_ITEM = "unit";
