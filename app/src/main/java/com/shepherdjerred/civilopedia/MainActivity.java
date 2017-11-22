@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.shepherdjerred.civilopedia.activities.building.BuildingListActivity;
 import com.shepherdjerred.civilopedia.activities.citystate.CityStateListActivity;
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
+        AdView mAdView = findViewById(R.id.main_ad);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
