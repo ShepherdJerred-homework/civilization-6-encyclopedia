@@ -2,8 +2,6 @@ package com.shepherdjerred.civilopedia.activities.unit;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -15,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.shepherdjerred.civilopedia.storage.CivilopediaDatabase;
 import com.shepherdjerred.civilopedia.R;
+import com.shepherdjerred.civilopedia.activities.building.Building;
+import com.shepherdjerred.civilopedia.storage.SqliteStore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,25 +64,7 @@ public class UnitListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        List<Unit> units = new ArrayList<>();
-        CivilopediaDatabase civilopediaDatabase = new CivilopediaDatabase(getApplicationContext());
-        SQLiteDatabase sqLiteDatabase = civilopediaDatabase.getReadableDatabase();
-
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Units ORDER BY Name", null);
-        if (c.moveToFirst()) {
-            do {
-                String unitType = c.getString(0);
-                String name = c.getString(1);
-                String description = c.getString(24);
-
-                Unit unit = new Unit(unitType, name, description);
-                units.add(unit);
-
-            } while (c.moveToNext());
-        }
-        c.close();
-        sqLiteDatabase.close();
-
+        List<Unit> units = new SqliteStore(getApplicationContext()).getUnits();
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, units, mTwoPane));
     }
 

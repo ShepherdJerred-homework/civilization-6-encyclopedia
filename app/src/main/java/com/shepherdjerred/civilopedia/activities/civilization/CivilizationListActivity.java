@@ -2,8 +2,6 @@ package com.shepherdjerred.civilopedia.activities.civilization;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -15,10 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.shepherdjerred.civilopedia.storage.CivilopediaDatabase;
 import com.shepherdjerred.civilopedia.R;
+import com.shepherdjerred.civilopedia.storage.SqliteStore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,27 +63,9 @@ public class CivilizationListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-
-        List<Civilization> civilizations = new ArrayList<>();
-        CivilopediaDatabase civilopediaDatabase = new CivilopediaDatabase(getApplicationContext());
-        SQLiteDatabase sqLiteDatabase = civilopediaDatabase.getReadableDatabase();
-
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Civilizations ORDER BY Name", null);
-        if (c.moveToFirst()) {
-            do {
-                String civilizationType = c.getString(0);
-                String name = c.getString(1);
-                String description = c.getString(2);
-
-                Civilization civilization = new Civilization(civilizationType, name, description);
-                civilizations.add(civilization);
-
-            } while (c.moveToNext());
-        }
-        c.close();
-        sqLiteDatabase.close();
-
-        recyclerView.setAdapter(new CivilizationListActivity.SimpleItemRecyclerViewAdapter(this, civilizations, mTwoPane));    }
+        List<Civilization> civilizations = new SqliteStore(getApplicationContext()).getCivilizations();
+        recyclerView.setAdapter(new CivilizationListActivity.SimpleItemRecyclerViewAdapter(this, civilizations, mTwoPane));
+    }
 
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
