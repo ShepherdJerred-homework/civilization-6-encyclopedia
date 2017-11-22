@@ -7,5 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.shepherdjerred.civilopedia.unit.UnitListActivity"
+    tools:context=".activities.unit.UnitListActivity"
     tools:listitem="@layout/unit_list_content" />

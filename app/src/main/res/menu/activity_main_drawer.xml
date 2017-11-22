@@ -23,8 +23,11 @@
             android:id="@+id/nav_buildings"
             android:title="Buildings" />
         <item
-            android:id="@+id/nav_wonders_projects"
-            android:title="Wonders and Projects" />
+            android:id="@+id/nav_wonders"
+            android:title="Wonders" />
+        <item
+            android:id="@+id/nav_projects"
+            android:title="Projects" />
         <item
             android:id="@+id/nav_units"
             android:title="Units" />
@@ -41,20 +44,29 @@
             android:id="@+id/nav_civics"
             android:title="Civics" />
         <item
-            android:id="@+id/nav_governments_policies"
-            android:title="Governments and Policies" />
+            android:id="@+id/nav_governments"
+            android:title="Governments" />
+        <item
+            android:id="@+id/nav_policies"
+            android:title="Policies" />
         <item
             android:id="@+id/nav_religion"
             android:title="Religions" />
         <item
             android:id="@+id/nav_terrain"
-            android:title="Terrain and Features" />
+            android:title="Terrain" />
+        <item
+            android:id="@+id/nav_features"
+            android:title="Features" />
         <item
             android:id="@+id/nav_resources"
             android:title="Resources" />
         <item
-            android:id="@+id/nav_improvements_routes"
-            android:title="Improvements and Routes" />
+            android:id="@+id/nav_improvements"
+            android:title="Improvements" />
+        <item
+            android:id="@+id/nav_routes"
+            android:title="Routes" />
     </group>
 
 </menu>
