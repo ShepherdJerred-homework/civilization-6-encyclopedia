@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.MobileAds;
 import com.shepherdjerred.civilopedia.activities.building.BuildingListActivity;
 import com.shepherdjerred.civilopedia.activities.citystate.CityStateListActivity;
 import com.shepherdjerred.civilopedia.activities.civic.CivicListActivity;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
     }
 
     @Override

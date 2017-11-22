@@ -16,9 +16,38 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res/layout/building',
+                    'src/main/res/layout/citystate',
+                    'src/main/res/layout/civic',
+                    'src/main/res/layout/civilization',
+                    'src/main/res/layout/district',
+                    'src/main/res/layout/feature',
+                    'src/main/res/layout/government',
+                    'src/main/res/layout/greatperson',
+                    'src/main/res/layout/improvement',
+                    'src/main/res/layout/leader',
+                    'src/main/res/layout/policy',
+                    'src/main/res/layout/project',
+                    'src/main/res/layout/religion',
+                    'src/main/res/layout/resource',
+                    'src/main/res/layout/route',
+                    'src/main/res/layout/technology',
+                    'src/main/res/layout/terrain',
+                    'src/main/res/layout/unit',
+                    'src/main/res/layout/unitpromotion',
+                    'src/main/res/layout/wonder',
+                    'src/main/res/layout',
+                    'src/main/res'
+            ]
+        }
+    }
 }
 
 dependencies {
+    compile 'com.google.android.gms:play-services-ads:11.6.0'
     compileOnly 'org.projectlombok:lombok:1.16.18'
     compileOnly 'javax.annotation:javax.annotation-api:1.3.1'
     annotationProcessor 'org.projectlombok:lombok:1.16.18'
