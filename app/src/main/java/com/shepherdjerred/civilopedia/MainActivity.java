@@ -11,6 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.shepherdjerred.civilopedia.building.BuildingListActivity;
+import com.shepherdjerred.civilopedia.civilization.CivilizationListActivity;
+import com.shepherdjerred.civilopedia.unit.UnitListActivity;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

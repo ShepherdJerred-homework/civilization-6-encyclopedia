@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BuildingListActivity"
+            android:name=".building.BuildingListActivity"
             android:label="@string/title_building_list"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -28,16 +28,16 @@
                 android:value="com.shepherdjerred.civilopedia.MainActivity" />
         </activity>
         <activity
-            android:name=".BuildingDetailActivity"
+            android:name=".building.BuildingDetailActivity"
             android:label="@string/title_building_detail"
-            android:parentActivityName=".BuildingListActivity"
+            android:parentActivityName=".building.BuildingListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.shepherdjerred.civilopedia.BuildingListActivity" />
+                android:value="com.shepherdjerred.civilopedia.building.BuildingListActivity" />
         </activity>
         <activity
-            android:name=".UnitListActivity"
+            android:name=".unit.UnitListActivity"
             android:label="@string/title_unit_list"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -45,16 +45,16 @@
                 android:value="com.shepherdjerred.civilopedia.MainActivity" />
         </activity>
         <activity
-            android:name=".UnitDetailActivity"
+            android:name=".unit.UnitDetailActivity"
             android:label="@string/title_unit_detail"
-            android:parentActivityName=".UnitListActivity"
+            android:parentActivityName=".unit.UnitListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.shepherdjerred.civilopedia.UnitListActivity" />
+                android:value="com.shepherdjerred.civilopedia.unit.UnitListActivity" />
         </activity>
         <activity
-            android:name=".CivilizationListActivity"
+            android:name=".civilization.CivilizationListActivity"
             android:label="@string/title_civilization_list"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -63,13 +63,13 @@
                 android:value="com.shepherdjerred.civilopedia.MainActivity" />
         </activity>
         <activity
-            android:name=".CivilizationDetailActivity"
+            android:name=".civilization.CivilizationDetailActivity"
             android:label="@string/title_civilization_detail"
-            android:parentActivityName=".CivilizationListActivity"
+            android:parentActivityName=".civilization.CivilizationListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.shepherdjerred.civilopedia.CivilizationListActivity" />
+                android:value="com.shepherdjerred.civilopedia.civilization.CivilizationListActivity" />
         </activity>
     </application>
 

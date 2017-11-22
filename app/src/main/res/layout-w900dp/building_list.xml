@@ -7,7 +7,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="com.shepherdjerred.civilopedia.BuildingListActivity">
+    tools:context="com.shepherdjerred.civilopedia.building.BuildingListActivity">
 
     <!--
     This layout is a two-pane layout for the Buildings
@@ -22,7 +22,7 @@
         android:layout_width="@dimen/item_width"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.shepherdjerred.civilopedia.BuildingListActivity"
+        tools:context="com.shepherdjerred.civilopedia.building.BuildingListActivity"
         tools:listitem="@layout/building_list_content" />
 
     <FrameLayout

@@ -1,4 +1,4 @@
-package com.shepherdjerred.civilopedia;
+package com.shepherdjerred.civilopedia.building;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,18 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.shepherdjerred.civilopedia.R;
+
 /**
- * An activity representing a single Unit detail screen. This
+ * An activity representing a single Building detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link UnitListActivity}.
+ * in a {@link BuildingListActivity}.
  */
-public class UnitDetailActivity extends AppCompatActivity {
+public class BuildingDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_unit_detail);
+        setContentView(R.layout.activity_building_detail);
         Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -41,12 +43,12 @@ public class UnitDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putParcelable(UnitDetailFragment.ARG_ITEM,
-                    getIntent().getParcelableExtra(UnitDetailFragment.ARG_ITEM));
-            UnitDetailFragment fragment = new UnitDetailFragment();
+            arguments.putParcelable(BuildingDetailFragment.ARG_ITEM,
+                    getIntent().getParcelableExtra(BuildingDetailFragment.ARG_ITEM));
+            BuildingDetailFragment fragment = new BuildingDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.unit_detail_container, fragment)
+                    .add(R.id.building_detail_container, fragment)
                     .commit();
         }
     }
@@ -61,7 +63,7 @@ public class UnitDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, UnitListActivity.class));
+            navigateUpTo(new Intent(this, BuildingListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

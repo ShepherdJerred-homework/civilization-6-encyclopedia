@@ -1,4 +1,4 @@
-package com.shepherdjerred.civilopedia;
+package com.shepherdjerred.civilopedia.building;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.shepherdjerred.civilopedia.object.Building;
+import com.shepherdjerred.civilopedia.R;
 
 public class BuildingDetailFragment extends Fragment {
 

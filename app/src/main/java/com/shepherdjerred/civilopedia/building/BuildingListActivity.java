@@ -1,4 +1,4 @@
-package com.shepherdjerred.civilopedia;
+package com.shepherdjerred.civilopedia.building;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.shepherdjerred.civilopedia.object.Building;
+import com.shepherdjerred.civilopedia.CivilopediaDatabase;
+import com.shepherdjerred.civilopedia.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.shepherdjerred.civilopedia.object;
+package com.shepherdjerred.civilopedia.building;
 
 import android.os.Parcel;
 import android.os.Parcelable;

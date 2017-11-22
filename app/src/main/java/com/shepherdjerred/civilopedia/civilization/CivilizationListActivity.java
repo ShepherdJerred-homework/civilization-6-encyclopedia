@@ -1,4 +1,4 @@
-package com.shepherdjerred.civilopedia;
+package com.shepherdjerred.civilopedia.civilization;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,20 +15,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.shepherdjerred.civilopedia.object.Unit;
+import com.shepherdjerred.civilopedia.CivilopediaDatabase;
+import com.shepherdjerred.civilopedia.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An activity representing a list of Units. This activity
+ * An activity representing a list of Civilizations. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link UnitDetailActivity} representing
+ * lead to a {@link CivilizationDetailActivity} representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class UnitListActivity extends AppCompatActivity {
+public class CivilizationListActivity extends AppCompatActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -39,7 +40,7 @@ public class UnitListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_unit_list);
+        setContentView(R.layout.activity_civilization_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,7 +52,7 @@ public class UnitListActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        if (findViewById(R.id.unit_detail_container) != null) {
+        if (findViewById(R.id.civilization_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -59,64 +60,64 @@ public class UnitListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.unit_list);
+        View recyclerView = findViewById(R.id.civilization_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        List<Unit> units = new ArrayList<>();
+
+        List<Civilization> civilizations = new ArrayList<>();
         CivilopediaDatabase civilopediaDatabase = new CivilopediaDatabase(getApplicationContext());
         SQLiteDatabase sqLiteDatabase = civilopediaDatabase.getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Units ORDER BY Name", null);
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Civilizations ORDER BY Name", null);
         if (c.moveToFirst()) {
             do {
-                String unitType = c.getString(0);
+                String civilizationType = c.getString(0);
                 String name = c.getString(1);
-                String description = c.getString(24);
+                String description = c.getString(2);
 
-                Unit unit = new Unit(unitType, name, description);
-                units.add(unit);
+                Civilization civilization = new Civilization(civilizationType, name, description);
+                civilizations.add(civilization);
 
             } while (c.moveToNext());
         }
         c.close();
         sqLiteDatabase.close();
 
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, units, mTwoPane));
-    }
+        recyclerView.setAdapter(new CivilizationListActivity.SimpleItemRecyclerViewAdapter(this, civilizations, mTwoPane));    }
 
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final UnitListActivity mParentActivity;
-        private final List<Unit> mValues;
+        private final CivilizationListActivity mParentActivity;
+        private final List<Civilization> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Unit item = (Unit) view.getTag();
+                Civilization item = (Civilization) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putParcelable(UnitDetailFragment.ARG_ITEM, item);
-                    UnitDetailFragment fragment = new UnitDetailFragment();
+                    arguments.putParcelable(CivilizationDetailFragment.ARG_ITEM_ID, item);
+                    CivilizationDetailFragment fragment = new CivilizationDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.unit_detail_container, fragment)
+                            .replace(R.id.civilization_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, UnitDetailActivity.class);
-                    intent.putExtra(UnitDetailFragment.ARG_ITEM, item);
+                    Intent intent = new Intent(context, CivilizationDetailActivity.class);
+                    intent.putExtra(CivilizationDetailFragment.ARG_ITEM_ID, item);
 
                     context.startActivity(intent);
                 }
             }
         };
 
-        SimpleItemRecyclerViewAdapter(UnitListActivity parent,
-                                      List<Unit> items,
+        SimpleItemRecyclerViewAdapter(CivilizationListActivity parent,
+                                      List<Civilization> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -126,7 +127,7 @@ public class UnitListActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.unit_list_content, parent, false);
+                    .inflate(R.layout.civilization_list_content, parent, false);
             return new ViewHolder(view);
         }
 

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:textIsSelectable="true"
-    tools:context="com.shepherdjerred.civilopedia.CivilizationDetailFragment">
+    tools:context="com.shepherdjerred.civilopedia.civilization.CivilizationDetailFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="com.shepherdjerred.civilopedia.CivilizationListActivity">
+    tools:context="com.shepherdjerred.civilopedia.civilization.CivilizationListActivity">
 
     <!--
     This layout is a two-pane layout for the Civilizations
@@ -24,7 +24,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.shepherdjerred.civilopedia.CivilizationListActivity"
+        tools:context="com.shepherdjerred.civilopedia.civilization.CivilizationListActivity"
         tools:listitem="@layout/civilization_list_content" />
 
     <FrameLayout
