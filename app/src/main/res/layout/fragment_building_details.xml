@@ -1,0 +1,157 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:textIsSelectable="true"
+        tools:context=".civitem.building.BuildingDetailsFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="General"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="description"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="cost"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/citizen_slots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="citizen_slots"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/trait_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="trait_type"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/entertainment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="entertainment"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/maintenance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="maintenance"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/housing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="housing"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prerequisites"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+            <TextView
+                android:id="@+id/prereq_tech"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="prereq_tech"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/prereq_civic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="prereq_civic"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/prereq_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="prereq_district"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/capital"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="capital"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/requires_adj_river"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="requires_adj_river"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Defense"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+            <TextView
+                android:id="@+id/outer_defense_hit_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="outer_defense_hit_points"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+            <TextView
+                android:id="@+id/outer_defense_strength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="outer_defense_strength"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

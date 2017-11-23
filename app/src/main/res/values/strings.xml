@@ -1,49 +1,11 @@
 <resources>
-    <string name="app_name">Civilopedia 6</string>
-    <string name="title_activity_main">Main Activity</string>
+    <string name="app_name">Civilopedia for Civilization 6</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_building_list">Buildings</string>
-    <string name="title_building_detail">Building Detail</string>
-    <string name="title_unit_list">Units</string>
-    <string name="title_unit_detail">Unit Detail</string>
-    <string name="title_civilization_list">Civilizations</string>
-    <string name="title_civilization_detail">Civilization Detail</string>
-    <string name="title_leader_list">Leaders</string>
-    <string name="title_leader_detail">Leader Detail</string>
-    <string name="title_citystate_list">City States</string>
-    <string name="title_citystate_detail">City State Detail</string>
-    <string name="title_district_list">Districts</string>
-    <string name="title_district_detail">District Detail</string>
-    <string name="title_wonder_list">Wonders</string>
-    <string name="title_wonder_detail">Wonder Detail</string>
-    <string name="title_civic_list">Civics</string>
-    <string name="title_civic_detail">Civic Detail</string>
-    <string name="title_unitpromotion_list">Unit Promotions</string>
-    <string name="title_unitpromotion_detail">Unit Promotion Detail</string>
-    <string name="title_feature_list">Features</string>
-    <string name="title_feature_detail">Feature Detail</string>
-    <string name="title_government_list">Governments</string>
-    <string name="title_government_detail">Government Detail</string>
-    <string name="title_greatperson_list">Great People</string>
-    <string name="title_greatperson_detail">Great Person Detail</string>
-    <string name="title_policy_list">Policies</string>
-    <string name="title_policy_detail">Policy Detail</string>
-    <string name="title_project_list">Projects</string>
-    <string name="title_project_detail">Project Detail</string>
-    <string name="title_religion_list">Religions</string>
-    <string name="title_religion_detail">Religion Detail</string>
-    <string name="title_technology_list">Technologies</string>
-    <string name="title_technology_detail">Technology Detail</string>
-    <string name="title_improvement_list">Improvements</string>
-    <string name="title_improvement_detail">Improvement Detail</string>
-    <string name="title_resource_list">Resources</string>
-    <string name="title_resource_detail">Resource Detail</string>
-    <string name="title_route_list">Routes</string>
-    <string name="title_route_detail">Route Detail</string>
-    <string name="title_terrain_list">Terrain</string>
-    <string name="title_terrain_detail">Terrain Detail</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
