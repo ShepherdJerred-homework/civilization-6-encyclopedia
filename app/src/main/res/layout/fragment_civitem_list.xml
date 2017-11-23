@@ -7,5 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.shepherdjerred.civilopedia.civitem.CivItemFragment"
+    tools:context="com.shepherdjerred.civilopedia.civitem.CivItemListFragment"
     tools:listitem="@layout/fragment_civitem_list_item" />

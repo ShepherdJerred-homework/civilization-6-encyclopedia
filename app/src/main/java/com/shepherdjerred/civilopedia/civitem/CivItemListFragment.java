@@ -13,17 +13,17 @@ import com.shepherdjerred.civilopedia.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CivItemFragment extends Fragment {
+public class CivItemListFragment extends Fragment {
 
     private static final String ARG_ITEMS = "civ_items";
     private List<CivItem> civItems;
     private OnListFragmentInteractionListener mListener;
 
-    public CivItemFragment() {
+    public CivItemListFragment() {
     }
 
-    public static CivItemFragment newInstance(ArrayList<? extends CivItem> civItems) {
-        CivItemFragment fragment = new CivItemFragment();
+    public static CivItemListFragment newInstance(ArrayList<? extends CivItem> civItems) {
+        CivItemListFragment fragment = new CivItemListFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_ITEMS, civItems);
         fragment.setArguments(args);
@@ -46,7 +46,7 @@ public class CivItemFragment extends Fragment {
 
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setAdapter(new MyCivItemRecyclerViewAdapter(civItems, mListener));
+            recyclerView.setAdapter(new CivItemListRecyclerViewAdapter(civItems, mListener));
         }
 
         return view;

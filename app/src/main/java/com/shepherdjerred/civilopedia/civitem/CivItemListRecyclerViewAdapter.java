@@ -10,12 +10,12 @@ import com.shepherdjerred.civilopedia.R;
 
 import java.util.List;
 
-public class MyCivItemRecyclerViewAdapter extends RecyclerView.Adapter<MyCivItemRecyclerViewAdapter.ViewHolder> {
+public class CivItemListRecyclerViewAdapter extends RecyclerView.Adapter<CivItemListRecyclerViewAdapter.ViewHolder> {
 
     private final List<CivItem> mValues;
-    private final CivItemFragment.OnListFragmentInteractionListener mListener;
+    private final CivItemListFragment.OnListFragmentInteractionListener mListener;
 
-    public MyCivItemRecyclerViewAdapter(List<CivItem> items, CivItemFragment.OnListFragmentInteractionListener listener) {
+    public CivItemListRecyclerViewAdapter(List<CivItem> items, CivItemListFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }

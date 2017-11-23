@@ -1,5 +1,6 @@
 package com.shepherdjerred.civilopedia;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,15 +13,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.shepherdjerred.civilopedia.civitem.CivItem;
-import com.shepherdjerred.civilopedia.civitem.CivItemFragment;
+import com.shepherdjerred.civilopedia.civitem.CivItemDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.CivItemListFragment;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.building.BuildingDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
+import com.shepherdjerred.civilopedia.civitem.civilization.CivilizationDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.leader.Leader;
+import com.shepherdjerred.civilopedia.civitem.leader.LeaderDetailsFragment;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 import com.shepherdjerred.civilopedia.storage.sqlite.SqliteDatastore;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CivItemFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        CivItemListFragment.OnListFragmentInteractionListener,
+        CivItemDetailsFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +48,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
+        
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -51,19 +68,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -80,13 +92,21 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_buildings:
-                fragment = CivItemFragment.newInstance(datastore.getBuildings());
+                fragment = CivItemListFragment.newInstance(datastore.getBuildings());
+                break;
+            case R.id.nav_civilizations:
+                fragment = CivItemListFragment.newInstance(datastore.getCivilizations());
+                break;
+            case R.id.nav_leaders:
+                fragment = CivItemListFragment.newInstance(datastore.getLeaders());
+                break;
         }
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null)
                     .commit();
         }
 
@@ -100,13 +120,23 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         if (item instanceof Building) {
             fragment = BuildingDetailsFragment.newInstance((Building) item);
+        } else if (item instanceof Civilization) {
+            fragment = CivilizationDetailsFragment.newInstance((Civilization) item);
+        } else if (item instanceof Leader) {
+            fragment = LeaderDetailsFragment.newInstance((Leader) item);
         }
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null)
                     .commit();
         }
+    }
+
+    @Override
+    public void onCivItemDetailsFragmentInteraction(Uri uri) {
+
     }
 }

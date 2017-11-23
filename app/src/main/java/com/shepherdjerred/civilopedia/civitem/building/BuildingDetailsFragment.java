@@ -1,25 +1,18 @@
 package com.shepherdjerred.civilopedia.civitem.building;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.shepherdjerred.civilopedia.R;
+import com.shepherdjerred.civilopedia.civitem.CivItemDetailsFragment;
 
-public class BuildingDetailsFragment extends Fragment {
+public class BuildingDetailsFragment extends CivItemDetailsFragment {
+
     private static final String ARG_BUILDING = "mBuilding";
-
     private Building mBuilding;
-
-    private OnFragmentInteractionListener mListener;
-
-    public BuildingDetailsFragment() {
-    }
 
     public static BuildingDetailsFragment newInstance(Building building) {
         BuildingDetailsFragment fragment = new BuildingDetailsFragment();
@@ -62,31 +55,4 @@ public class BuildingDetailsFragment extends Fragment {
         return rootView;
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    // TODO this will be used when we want to open related info, ie a tech that is mentioned on this fragment
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }
