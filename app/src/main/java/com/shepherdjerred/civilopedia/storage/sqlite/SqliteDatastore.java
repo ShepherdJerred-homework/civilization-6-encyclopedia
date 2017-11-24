@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
+import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.storage.Datastore;
@@ -135,5 +136,28 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         c.close();
         sqLiteDatabase.close();
         return leaders;
+    }
+
+    @Override
+    public ArrayList<CityState> getCityStates() {
+        ArrayList<CityState> cityStates = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Civilizations WHERE StartingCivilizationLevelType == 'CIVILIZATION_LEVEL_CITY_STATE' ORDER BY Name", null);
+        if (c.moveToFirst()) {
+            do {
+                String civilizationType = c.getString(0);
+                String name = c.getString(1);
+                String description = c.getString(2);
+
+                CityState cityState = new CityState(civilizationType, name, description);
+                cityStates.add(cityState);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+        return cityStates;
     }
 }

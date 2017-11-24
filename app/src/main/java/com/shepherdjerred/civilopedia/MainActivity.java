@@ -13,20 +13,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.shepherdjerred.civilopedia.civitem.CivItem;
 import com.shepherdjerred.civilopedia.civitem.CivItemDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.CivItemListFragment;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.building.BuildingDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
+import com.shepherdjerred.civilopedia.civitem.citystate.CityStateDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.civilization.CivilizationDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.leader.LeaderDetailsFragment;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 import com.shepherdjerred.civilopedia.storage.sqlite.SqliteDatastore;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -50,10 +52,10 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
-        
-        AdView mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+
+//        AdView mAdView = findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -87,22 +89,28 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        Fragment fragment = null;
         Datastore datastore = new SqliteDatastore(getApplicationContext());
+        ArrayList<? extends CivItem> civItems = null;
 
         switch (id) {
+            case R.id.nav_home:
+                break;
             case R.id.nav_buildings:
-                fragment = CivItemListFragment.newInstance(datastore.getBuildings());
+                civItems = datastore.getBuildings();
                 break;
             case R.id.nav_civilizations:
-                fragment = CivItemListFragment.newInstance(datastore.getCivilizations());
+                civItems = datastore.getCivilizations();
                 break;
             case R.id.nav_leaders:
-                fragment = CivItemListFragment.newInstance(datastore.getLeaders());
+                civItems = datastore.getLeaders();
+                break;
+            case R.id.nav_city_states:
+                civItems = datastore.getCityStates();
                 break;
         }
 
-        if (fragment != null) {
+        if (civItems != null) {
+            Fragment fragment = CivItemListFragment.newInstance(civItems);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
@@ -118,12 +126,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(CivItem item) {
         Fragment fragment = null;
+
         if (item instanceof Building) {
             fragment = BuildingDetailsFragment.newInstance((Building) item);
         } else if (item instanceof Civilization) {
             fragment = CivilizationDetailsFragment.newInstance((Civilization) item);
         } else if (item instanceof Leader) {
             fragment = LeaderDetailsFragment.newInstance((Leader) item);
+        } else if (item instanceof CityState) {
+            fragment = CityStateDetailsFragment.newInstance((CityState) item);
         }
 
         if (fragment != null) {
