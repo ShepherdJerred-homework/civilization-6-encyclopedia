@@ -13,10 +13,10 @@ public class LeaderDetailsFragment extends CivItemDetailsFragment {
     private static final String ARG_LEADER = "leader";
     private Leader mLeader;
 
-    public static LeaderDetailsFragment newInstance(Leader civilization) {
+    public static LeaderDetailsFragment newInstance(Leader leader) {
         LeaderDetailsFragment fragment = new LeaderDetailsFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_LEADER, civilization);
+        args.putParcelable(ARG_LEADER, leader);
         fragment.setArguments(args);
         return fragment;
     }

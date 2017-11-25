@@ -35,13 +35,6 @@
                 android:layout_height="wrap_content"
                 android:text="cost"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
-
-            <TextView
-                android:id="@+id/maintenance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="maintenance"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,46 +57,12 @@
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
             <TextView
-                android:id="@+id/prereq_civic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="prereq_civic"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
-
-            <TextView
                 android:id="@+id/prereq_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="prereq_district"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Defense"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
-
-            <TextView
-                android:id="@+id/outer_defense_hit_points"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="outer_defense_hit_points"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
-
-            <TextView
-                android:id="@+id/outer_defense_strength"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="outer_defense_strength"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1" />
-        </LinearLayout>
-
     </LinearLayout>
+
 </android.support.v4.widget.NestedScrollView>

@@ -23,8 +23,12 @@ import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityStateDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.civilization.CivilizationDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.district.District;
+import com.shepherdjerred.civilopedia.civitem.district.DistrictDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.leader.LeaderDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.project.Project;
+import com.shepherdjerred.civilopedia.civitem.project.ProjectDetailsFragment;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 import com.shepherdjerred.civilopedia.storage.sqlite.SqliteDatastore;
 
@@ -95,9 +99,6 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.nav_home:
                 break;
-            case R.id.nav_buildings:
-                civItems = datastore.getBuildings();
-                break;
             case R.id.nav_civilizations:
                 civItems = datastore.getCivilizations();
                 break;
@@ -106,6 +107,18 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_city_states:
                 civItems = datastore.getCityStates();
+                break;
+            case R.id.nav_districts:
+                civItems = datastore.getDistricts();
+                break;
+            case R.id.nav_buildings:
+                civItems = datastore.getBuildings();
+                break;
+            case R.id.nav_wonders:
+                civItems = datastore.getWonders();
+                break;
+            case R.id.nav_projects:
+                civItems = datastore.getProjects();
                 break;
         }
 
@@ -127,14 +140,19 @@ public class MainActivity extends AppCompatActivity
     public void onListFragmentInteraction(CivItem item) {
         Fragment fragment = null;
 
-        if (item instanceof Building) {
-            fragment = BuildingDetailsFragment.newInstance((Building) item);
-        } else if (item instanceof Civilization) {
+        if (item instanceof Civilization) {
             fragment = CivilizationDetailsFragment.newInstance((Civilization) item);
         } else if (item instanceof Leader) {
             fragment = LeaderDetailsFragment.newInstance((Leader) item);
         } else if (item instanceof CityState) {
             fragment = CityStateDetailsFragment.newInstance((CityState) item);
+        } else if (item instanceof District) {
+            fragment = DistrictDetailsFragment.newInstance((District) item);
+        } else if (item instanceof Building) {
+            // This handles Wonders as well
+            fragment = BuildingDetailsFragment.newInstance((Building) item);
+        } else if (item instanceof Project) {
+            fragment = ProjectDetailsFragment.newInstance((Project) item);
         }
 
         if (fragment != null) {
