@@ -11,6 +11,7 @@ import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.district.District;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
+import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 
 import java.util.ArrayList;
@@ -286,6 +287,30 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         c.close();
         sqLiteDatabase.close();
         return projects;
+    }
+
+    @Override
+    public ArrayList<Unit> getUnits() {
+        ArrayList<Unit> units = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Units ORDER BY Name", null);
+        if (c.moveToFirst()) {
+            do {
+                String unitType = c.getString(0);
+                String name = c.getString(1);
+                int cost = c.getInt(10);
+                String description = c.getString(24);
+
+                Unit unit = new Unit(unitType, name, cost, description);
+                units.add(unit);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+        return units;
     }
 
 

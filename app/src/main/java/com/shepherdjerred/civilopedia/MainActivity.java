@@ -29,6 +29,8 @@ import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.leader.LeaderDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
 import com.shepherdjerred.civilopedia.civitem.project.ProjectDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.unit.Unit;
+import com.shepherdjerred.civilopedia.civitem.unit.UnitDetailsFragment;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 import com.shepherdjerred.civilopedia.storage.sqlite.SqliteDatastore;
 
@@ -120,6 +122,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_projects:
                 civItems = datastore.getProjects();
                 break;
+            case R.id.nav_units:
+                civItems = datastore.getUnits();
         }
 
         if (civItems != null) {
@@ -153,6 +157,8 @@ public class MainActivity extends AppCompatActivity
             fragment = BuildingDetailsFragment.newInstance((Building) item);
         } else if (item instanceof Project) {
             fragment = ProjectDetailsFragment.newInstance((Project) item);
+        } else if (item instanceof Unit) {
+            fragment = UnitDetailsFragment.newInstance((Unit) item);
         }
 
         if (fragment != null) {
