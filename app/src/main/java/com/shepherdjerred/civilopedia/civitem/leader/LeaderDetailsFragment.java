@@ -7,34 +7,16 @@ import android.view.ViewGroup;
 
 import com.shepherdjerred.civilopedia.R;
 import com.shepherdjerred.civilopedia.civitem.CivItemDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 
 public class LeaderDetailsFragment extends CivItemDetailsFragment {
-
-    private static final String ARG_LEADER = "leader";
-    private Leader mLeader;
-
-    public static LeaderDetailsFragment newInstance(Leader leader) {
-        LeaderDetailsFragment fragment = new LeaderDetailsFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(ARG_LEADER, leader);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mLeader = getArguments().getParcelable(ARG_LEADER);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_leader_details, container, false);
 
-        if (mLeader != null) {
-
+        if (civItem != null && civItem instanceof Leader) {
+            Leader leader = (Leader) civItem;
         }
 
         return rootView;

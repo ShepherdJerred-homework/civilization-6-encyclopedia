@@ -11,37 +11,19 @@ import com.shepherdjerred.civilopedia.civitem.CivItemDetailsFragment;
 
 public class DistrictDetailsFragment extends CivItemDetailsFragment {
 
-    private static final String ARG_DISTRICT = "district";
-    private District mDistrict;
-
-    public static DistrictDetailsFragment newInstance(District district) {
-        DistrictDetailsFragment fragment = new DistrictDetailsFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(ARG_DISTRICT, district);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mDistrict = getArguments().getParcelable(ARG_DISTRICT);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_district_details, container, false);
 
-        if (mDistrict != null) {
-            ((TextView) rootView.findViewById(R.id.description)).setText("Description: " + mDistrict.getDescription());
+        if (civItem != null && civItem instanceof District) {
+            District district = (District) civItem;
+            ((TextView) rootView.findViewById(R.id.description)).setText("Description: " + district.getDescription());
 
-            ((TextView) rootView.findViewById(R.id.prereq_tech)).setText("Technology: " + mDistrict.getPrereqTech());
-            ((TextView) rootView.findViewById(R.id.prereq_civic)).setText("Civic: " + mDistrict.getPrereqCivic());
+            ((TextView) rootView.findViewById(R.id.prereq_tech)).setText("Technology: " + district.getPrereqTech());
+            ((TextView) rootView.findViewById(R.id.prereq_civic)).setText("Civic: " + district.getPrereqCivic());
 
-            ((TextView) rootView.findViewById(R.id.description)).setText("Hit points: " + mDistrict.getHitPoints());
+            ((TextView) rootView.findViewById(R.id.description)).setText("Hit points: " + district.getHitPoints());
         }
 
         return rootView;

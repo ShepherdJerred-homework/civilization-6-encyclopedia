@@ -13,24 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.ads.MobileAds;
 import com.shepherdjerred.civilopedia.civitem.CivItem;
 import com.shepherdjerred.civilopedia.civitem.CivItemDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.CivItemListFragment;
-import com.shepherdjerred.civilopedia.civitem.building.Building;
-import com.shepherdjerred.civilopedia.civitem.building.BuildingDetailsFragment;
-import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
-import com.shepherdjerred.civilopedia.civitem.citystate.CityStateDetailsFragment;
-import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
-import com.shepherdjerred.civilopedia.civitem.civilization.CivilizationDetailsFragment;
-import com.shepherdjerred.civilopedia.civitem.district.District;
-import com.shepherdjerred.civilopedia.civitem.district.DistrictDetailsFragment;
-import com.shepherdjerred.civilopedia.civitem.leader.Leader;
-import com.shepherdjerred.civilopedia.civitem.leader.LeaderDetailsFragment;
-import com.shepherdjerred.civilopedia.civitem.project.Project;
-import com.shepherdjerred.civilopedia.civitem.project.ProjectDetailsFragment;
-import com.shepherdjerred.civilopedia.civitem.unit.Unit;
-import com.shepherdjerred.civilopedia.civitem.unit.UnitDetailsFragment;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 import com.shepherdjerred.civilopedia.storage.sqlite.SqliteDatastore;
 
@@ -56,9 +41,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
-
+        
+//        MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
 //        AdView mAdView = findViewById(R.id.adView);
 //        AdRequest adRequest = new AdRequest.Builder().build();
 //        mAdView.loadAd(adRequest);
@@ -95,44 +79,47 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        Datastore datastore = new SqliteDatastore(getApplicationContext());
-        ArrayList<? extends CivItem> civItems = null;
+        if (id == R.id.nav_home) {
+            // Show home page
+        } else {
+            Datastore datastore = new SqliteDatastore(getApplicationContext());
+            ArrayList<? extends CivItem> civItems = null;
 
-        switch (id) {
-            case R.id.nav_home:
-                break;
-            case R.id.nav_civilizations:
-                civItems = datastore.getCivilizations();
-                break;
-            case R.id.nav_leaders:
-                civItems = datastore.getLeaders();
-                break;
-            case R.id.nav_city_states:
-                civItems = datastore.getCityStates();
-                break;
-            case R.id.nav_districts:
-                civItems = datastore.getDistricts();
-                break;
-            case R.id.nav_buildings:
-                civItems = datastore.getBuildings();
-                break;
-            case R.id.nav_wonders:
-                civItems = datastore.getWonders();
-                break;
-            case R.id.nav_projects:
-                civItems = datastore.getProjects();
-                break;
-            case R.id.nav_units:
-                civItems = datastore.getUnits();
-        }
+            switch (id) {
+                case R.id.nav_civilizations:
+                    civItems = datastore.getCivilizations();
+                    break;
+                case R.id.nav_leaders:
+                    civItems = datastore.getLeaders();
+                    break;
+                case R.id.nav_city_states:
+                    civItems = datastore.getCityStates();
+                    break;
+                case R.id.nav_districts:
+                    civItems = datastore.getDistricts();
+                    break;
+                case R.id.nav_buildings:
+                    civItems = datastore.getBuildings();
+                    break;
+                case R.id.nav_wonders:
+                    civItems = datastore.getWonders();
+                    break;
+                case R.id.nav_projects:
+                    civItems = datastore.getProjects();
+                    break;
+                case R.id.nav_units:
+                    civItems = datastore.getUnits();
+                    break;
+            }
 
-        if (civItems != null) {
-            Fragment fragment = CivItemListFragment.newInstance(civItems);
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, fragment)
-                    .addToBackStack(null)
-                    .commit();
+            if (civItems != null) {
+                Fragment fragment = CivItemListFragment.newInstance(civItems);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -142,24 +129,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(CivItem item) {
-        Fragment fragment = null;
-
-        if (item instanceof Civilization) {
-            fragment = CivilizationDetailsFragment.newInstance((Civilization) item);
-        } else if (item instanceof Leader) {
-            fragment = LeaderDetailsFragment.newInstance((Leader) item);
-        } else if (item instanceof CityState) {
-            fragment = CityStateDetailsFragment.newInstance((CityState) item);
-        } else if (item instanceof District) {
-            fragment = DistrictDetailsFragment.newInstance((District) item);
-        } else if (item instanceof Building) {
-            // This handles Wonders as well
-            fragment = BuildingDetailsFragment.newInstance((Building) item);
-        } else if (item instanceof Project) {
-            fragment = ProjectDetailsFragment.newInstance((Project) item);
-        } else if (item instanceof Unit) {
-            fragment = UnitDetailsFragment.newInstance((Unit) item);
-        }
+        Fragment fragment = CivItemDetailsFragment.newInstance(item);
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
