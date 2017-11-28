@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        
+
 //        MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
 //        AdView mAdView = findViewById(R.id.adView);
 //        AdRequest adRequest = new AdRequest.Builder().build();
@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity
             switch (id) {
                 case R.id.nav_civilizations:
                     civItems = datastore.getCivilizations();
+                    getSupportActionBar().setTitle("TEST");
                     break;
                 case R.id.nav_leaders:
                     civItems = datastore.getLeaders();

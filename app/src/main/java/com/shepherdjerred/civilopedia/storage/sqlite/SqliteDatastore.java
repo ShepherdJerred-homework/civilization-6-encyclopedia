@@ -20,9 +20,106 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
     private static final String DATABASE_NAME = "DebugGameplay.sqlite";
     private static final int DATABASE_VERSION = 1;
+    private LocalizationDatastore localizationDatastore;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        localizationDatastore = new LocalizationDatastore(context);
+    }
+
+    @Override
+    public ArrayList<Civilization> getCivilizations() {
+        ArrayList<Civilization> civilizations = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Civilizations WHERE StartingCivilizationLevelType == 'CIVILIZATION_LEVEL_FULL_CIV' ORDER BY Name", null);
+        if (c.moveToFirst()) {
+            do {
+                String civilizationType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                String description = localizationDatastore.getEnglishValue(c.getString(2));
+
+                Civilization civilization = new Civilization(civilizationType, name, description);
+                civilizations.add(civilization);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+        return civilizations;
+    }
+
+    @Override
+    public ArrayList<Leader> getLeaders() {
+        ArrayList<Leader> leaders = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Leaders WHERE InheritFrom == 'LEADER_DEFAULT' ORDER BY Name", null);
+        if (c.moveToFirst()) {
+            do {
+                String leaderType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+
+                Leader leader = new Leader(leaderType, name);
+                leaders.add(leader);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+        return leaders;
+    }
+
+    @Override
+    public ArrayList<CityState> getCityStates() {
+        ArrayList<CityState> cityStates = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Civilizations WHERE StartingCivilizationLevelType == 'CIVILIZATION_LEVEL_CITY_STATE' ORDER BY Name", null);
+        if (c.moveToFirst()) {
+            do {
+                String civilizationType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                String description = localizationDatastore.getEnglishValue(c.getString(2));
+
+                CityState cityState = new CityState(civilizationType, name, description);
+                cityStates.add(cityState);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+        return cityStates;
+    }
+
+    @Override
+    public ArrayList<District> getDistricts() {
+        ArrayList<District> districts = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Districts WHERE InternalOnly == 0 AND CityCenter != 1 ORDER BY Name", null);
+        if (c.moveToFirst()) {
+            do {
+                String districtType = c.getString(0);
+                String name = c.getString(1);
+                String prereqTech = c.getString(2);
+                String prereqCivic = c.getString(3);
+                String description = c.getString(5);
+                int cost = c.getInt(6);
+                int hitPoints = c.getInt(15);
+
+                District district = new District(districtType, name, prereqTech, prereqCivic, description, cost, hitPoints);
+                districts.add(district);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+        return districts;
     }
 
     @Override
@@ -35,16 +132,16 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         if (c.moveToFirst()) {
             do {
                 String buildingType = c.getString(0);
-                String name = c.getString(1);
-                String prereqTech = c.getString(2);
-                String prereqCivic = c.getString(3);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                String prereqTech = localizationDatastore.getEnglishValue("LOC_TECH_" + c.getString(2) + "_NAME");
+                String prereqCivic = localizationDatastore.getEnglishValue("LOC_CIVIC_" + c.getString(3) + "_NAME");
                 int cost = c.getInt(4);
                 int maxPlayerInstances = c.getInt(5);
                 int maxWorldInstances = c.getInt(6);
                 boolean capital = c.getInt(7) != 0;
-                String prereqDistrict = c.getString(8);
+                String prereqDistrict = localizationDatastore.getEnglishValue("LOC_DISTRICT_" + c.getString(8) + "_NAME");
                 String adjacentDistrict = c.getString(9);
-                String description = c.getString(10);
+                String description = c.getString(10) != null ? localizationDatastore.getEnglishValue(c.getString(10)) : "None";
                 boolean requiresPlacement = c.getInt(11) != 0;
                 boolean requiresRiver = c.getInt(12) != 0;
                 int outerDefenseHitPoints = c.getInt(13);
@@ -94,101 +191,6 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         c.close();
         sqLiteDatabase.close();
         return buildings;
-    }
-
-    @Override
-    public ArrayList<Civilization> getCivilizations() {
-        ArrayList<Civilization> civilizations = new ArrayList<>();
-
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Civilizations WHERE StartingCivilizationLevelType == 'CIVILIZATION_LEVEL_FULL_CIV' ORDER BY Name", null);
-        if (c.moveToFirst()) {
-            do {
-                String civilizationType = c.getString(0);
-                String name = c.getString(1);
-                String description = c.getString(2);
-
-                Civilization civilization = new Civilization(civilizationType, name, description);
-                civilizations.add(civilization);
-
-            } while (c.moveToNext());
-        }
-        c.close();
-        sqLiteDatabase.close();
-        return civilizations;
-    }
-
-    @Override
-    public ArrayList<Leader> getLeaders() {
-        ArrayList<Leader> leaders = new ArrayList<>();
-
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Leaders WHERE InheritFrom == 'LEADER_DEFAULT' ORDER BY Name", null);
-        if (c.moveToFirst()) {
-            do {
-                String leaderType = c.getString(0);
-                String name = c.getString(1);
-
-                Leader leader = new Leader(leaderType, name);
-                leaders.add(leader);
-
-            } while (c.moveToNext());
-        }
-        c.close();
-        sqLiteDatabase.close();
-        return leaders;
-    }
-
-    @Override
-    public ArrayList<CityState> getCityStates() {
-        ArrayList<CityState> cityStates = new ArrayList<>();
-
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Civilizations WHERE StartingCivilizationLevelType == 'CIVILIZATION_LEVEL_CITY_STATE' ORDER BY Name", null);
-        if (c.moveToFirst()) {
-            do {
-                String civilizationType = c.getString(0);
-                String name = c.getString(1);
-                String description = c.getString(2);
-
-                CityState cityState = new CityState(civilizationType, name, description);
-                cityStates.add(cityState);
-
-            } while (c.moveToNext());
-        }
-        c.close();
-        sqLiteDatabase.close();
-        return cityStates;
-    }
-
-    @Override
-    public ArrayList<District> getDistricts() {
-        ArrayList<District> districts = new ArrayList<>();
-
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Districts WHERE InternalOnly == 0 AND CityCenter != 1 ORDER BY Name", null);
-        if (c.moveToFirst()) {
-            do {
-                String districtType = c.getString(0);
-                String name = c.getString(1);
-                String prereqTech = c.getString(2);
-                String prereqCivic = c.getString(3);
-                String description = c.getString(5);
-                int cost = c.getInt(6);
-                int hitPoints = c.getInt(15);
-
-                District district = new District(districtType, name, prereqTech, prereqCivic, description, cost, hitPoints);
-                districts.add(district);
-
-            } while (c.moveToNext());
-        }
-        c.close();
-        sqLiteDatabase.close();
-        return districts;
     }
 
     @Override
