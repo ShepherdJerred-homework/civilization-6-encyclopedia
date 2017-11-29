@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -88,9 +89,11 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new HomeFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.content_frame, fragment)
                     .addToBackStack(null)
                     .commit();
+            getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
         } else {
             Datastore datastore = new SqliteDatastore(getApplicationContext());
             ArrayList<? extends CivItem> civItems = null;
@@ -98,7 +101,6 @@ public class MainActivity extends AppCompatActivity
             switch (id) {
                 case R.id.nav_civilizations:
                     civItems = datastore.getCivilizations();
-                    getSupportActionBar().setTitle("TEST");
                     break;
                 case R.id.nav_leaders:
                     civItems = datastore.getLeaders();
@@ -127,9 +129,11 @@ public class MainActivity extends AppCompatActivity
                 Fragment fragment = CivItemListFragment.newInstance(civItems);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .replace(R.id.content_frame, fragment)
                         .addToBackStack(null)
                         .commit();
+                getSupportActionBar().setTitle(item.getTitle());
             }
         }
 
@@ -145,9 +149,11 @@ public class MainActivity extends AppCompatActivity
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.content_frame, fragment)
                     .addToBackStack(null)
                     .commit();
+            getSupportActionBar().setTitle(item.getName());
         }
     }
 
