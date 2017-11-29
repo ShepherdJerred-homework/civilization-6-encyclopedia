@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "28732365338",
+    "firebase_url": "https://civilopedia-549d0.firebaseio.com",
+    "project_id": "civilopedia-549d0",
+    "storage_bucket": "civilopedia-549d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28732365338:android:678965c0e30f9b0e",
+        "android_client_info": {
+          "package_name": "com.shepherdjerred.civilopedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28732365338-4ghcghb4me97qcr7k9krfeb1teuv0e3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJFkZoX8BhCv42BzLEhNn2Hog872IyfCE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
