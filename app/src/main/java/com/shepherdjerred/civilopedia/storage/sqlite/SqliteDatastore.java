@@ -136,54 +136,11 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
                 String prereqTech = localizationDatastore.getEnglishValue("LOC_TECH_" + c.getString(2) + "_NAME");
                 String prereqCivic = localizationDatastore.getEnglishValue("LOC_CIVIC_" + c.getString(3) + "_NAME");
                 int cost = c.getInt(4);
-                int maxPlayerInstances = c.getInt(5);
-                int maxWorldInstances = c.getInt(6);
-                boolean capital = c.getInt(7) != 0;
                 String prereqDistrict = localizationDatastore.getEnglishValue("LOC_DISTRICT_" + c.getString(8) + "_NAME");
-                String adjacentDistrict = c.getString(9);
-                String description = c.getString(10) != null ? localizationDatastore.getEnglishValue(c.getString(10)) : "None";
-                boolean requiresPlacement = c.getInt(11) != 0;
-                boolean requiresRiver = c.getInt(12) != 0;
-                int outerDefenseHitPoints = c.getInt(13);
-                int housing = c.getInt(14);
-                int entertainment = c.getInt(15);
-                String adjacentResource = c.getString(16);
-                boolean coast = c.getInt(17) != 0;
-                boolean enabledByReligion = c.getInt(18) != 0;
-                boolean allowsHolyCity = c.getInt(19) != 0;
-                String purchaseYield = c.getString(20);
-                boolean mustPurchase = c.getInt(21) != 0;
+                String description = c.getString(10) != null ? localizationDatastore.getEnglishValue(c.getString(10)) : null;
                 int maintenance = c.getInt(22);
-                boolean isWonder = c.getInt(23) != 0;
-                String traitType = c.getString(24);
-                int outerDefenseStrength = c.getInt(25);
-                int citizenSlots = c.getInt(25);
-                boolean mustBeLake = c.getInt(27) != 0;
-                boolean mustNotBeLake = c.getInt(28) != 0;
-                int regionalRange = c.getInt(29);
-                boolean adjacentToMountain = c.getInt(30) != 0;
-                String obsoleteEra = c.getString(31);
-                boolean requiresReligion = c.getInt(32) != 0;
-                int grantFortification = c.getInt(33);
-                int defenseModifier = c.getInt(34);
-                boolean internalOnly = c.getInt(35) != 0;
-                boolean requiresAdjacentRiver = c.getInt(36) != 0;
-                String quote = c.getString(37);
-                String quoteAudio = c.getString(38);
-                boolean mustBeAdjacentLand = c.getInt(39) != 0;
-                boolean adjacentCapital = c.getInt(40) != 0;
-                String adjacentImprovement = c.getString(41);
-                String cityAdjacentTerrain = c.getString(42);
-                boolean unlockGovernmentPolicy = c.getInt(43) != 0;
-                String governmentTierRequirement = c.getString(44);
 
-                Building building = new Building(buildingType, name, prereqTech, prereqCivic, cost, maxPlayerInstances, maxWorldInstances,
-                        capital, prereqDistrict, adjacentDistrict, description, requiresPlacement, requiresRiver, outerDefenseHitPoints,
-                        housing, entertainment, adjacentResource, coast, enabledByReligion, allowsHolyCity, purchaseYield, mustPurchase,
-                        maintenance, isWonder, traitType, outerDefenseStrength, citizenSlots, mustBeLake, mustNotBeLake, regionalRange,
-                        adjacentToMountain, obsoleteEra, requiresReligion, grantFortification, defenseModifier, internalOnly, requiresAdjacentRiver,
-                        quote, quoteAudio, mustBeAdjacentLand, adjacentCapital, adjacentImprovement, cityAdjacentTerrain, unlockGovernmentPolicy,
-                        governmentTierRequirement);
+                Building building = new Building(buildingType, name, prereqTech, prereqCivic, cost, prereqDistrict, description, maintenance);
                 buildings.add(building);
 
             } while (c.moveToNext());
@@ -203,58 +160,15 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         if (c.moveToFirst()) {
             do {
                 String buildingType = c.getString(0);
-                String name = c.getString(1);
-                String prereqTech = c.getString(2);
-                String prereqCivic = c.getString(3);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                String prereqTech = localizationDatastore.getEnglishValue("LOC_TECH_" + c.getString(2) + "_NAME");
+                String prereqCivic = localizationDatastore.getEnglishValue("LOC_CIVIC_" + c.getString(3) + "_NAME");
                 int cost = c.getInt(4);
-                int maxPlayerInstances = c.getInt(5);
-                int maxWorldInstances = c.getInt(6);
-                boolean capital = c.getInt(7) != 0;
-                String prereqDistrict = c.getString(8);
-                String adjacentDistrict = c.getString(9);
-                String description = c.getString(10);
-                boolean requiresPlacement = c.getInt(11) != 0;
-                boolean requiresRiver = c.getInt(12) != 0;
-                int outerDefenseHitPoints = c.getInt(13);
-                int housing = c.getInt(14);
-                int entertainment = c.getInt(15);
-                String adjacentResource = c.getString(16);
-                boolean coast = c.getInt(17) != 0;
-                boolean enabledByReligion = c.getInt(18) != 0;
-                boolean allowsHolyCity = c.getInt(19) != 0;
-                String purchaseYield = c.getString(20);
-                boolean mustPurchase = c.getInt(21) != 0;
+                String prereqDistrict = localizationDatastore.getEnglishValue("LOC_DISTRICT_" + c.getString(8) + "_NAME");
+                String description = c.getString(10) != null ? localizationDatastore.getEnglishValue(c.getString(10)) : null;
                 int maintenance = c.getInt(22);
-                boolean isWonder = c.getInt(23) != 0;
-                String traitType = c.getString(24);
-                int outerDefenseStrength = c.getInt(25);
-                int citizenSlots = c.getInt(25);
-                boolean mustBeLake = c.getInt(27) != 0;
-                boolean mustNotBeLake = c.getInt(28) != 0;
-                int regionalRange = c.getInt(29);
-                boolean adjacentToMountain = c.getInt(30) != 0;
-                String obsoleteEra = c.getString(31);
-                boolean requiresReligion = c.getInt(32) != 0;
-                int grantFortification = c.getInt(33);
-                int defenseModifier = c.getInt(34);
-                boolean internalOnly = c.getInt(35) != 0;
-                boolean requiresAdjacentRiver = c.getInt(36) != 0;
-                String quote = c.getString(37);
-                String quoteAudio = c.getString(38);
-                boolean mustBeAdjacentLand = c.getInt(39) != 0;
-                boolean adjacentCapital = c.getInt(40) != 0;
-                String adjacentImprovement = c.getString(41);
-                String cityAdjacentTerrain = c.getString(42);
-                boolean unlockGovernmentPolicy = c.getInt(43) != 0;
-                String governmentTierRequirement = c.getString(44);
 
-                Building building = new Building(buildingType, name, prereqTech, prereqCivic, cost, maxPlayerInstances, maxWorldInstances,
-                        capital, prereqDistrict, adjacentDistrict, description, requiresPlacement, requiresRiver, outerDefenseHitPoints,
-                        housing, entertainment, adjacentResource, coast, enabledByReligion, allowsHolyCity, purchaseYield, mustPurchase,
-                        maintenance, isWonder, traitType, outerDefenseStrength, citizenSlots, mustBeLake, mustNotBeLake, regionalRange,
-                        adjacentToMountain, obsoleteEra, requiresReligion, grantFortification, defenseModifier, internalOnly, requiresAdjacentRiver,
-                        quote, quoteAudio, mustBeAdjacentLand, adjacentCapital, adjacentImprovement, cityAdjacentTerrain, unlockGovernmentPolicy,
-                        governmentTierRequirement);
+                Building building = new Building(buildingType, name, prereqTech, prereqCivic, cost, prereqDistrict, description, maintenance);
                 wonders.add(building);
 
             } while (c.moveToNext());

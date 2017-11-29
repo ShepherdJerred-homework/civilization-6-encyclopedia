@@ -18,16 +18,33 @@ public class BuildingDetailsFragment extends CivItemDetailsFragment {
 
         if (civItem != null && civItem instanceof Building) {
             Building building = (Building) civItem;
-            ((TextView) rootView.findViewById(R.id.description)).setText("Description: " + building.getDescription());
-            ((TextView) rootView.findViewById(R.id.cost)).setText("Production cost: " + building.getCost());
-            ((TextView) rootView.findViewById(R.id.maintenance)).setText("Maintenance: " + building.getMaintenance());
+            if (building.getDescription() != null) {
+                ((TextView) rootView.findViewById(R.id.description)).setText("Description: " + building.getDescription());
+            } else {
+                rootView.findViewById(R.id.description).setVisibility(View.GONE);
+            }
 
-            ((TextView) rootView.findViewById(R.id.prereq_tech)).setText("Technology: " + building.getPrereqTech());
-            ((TextView) rootView.findViewById(R.id.prereq_civic)).setText("Civic: " + building.getPrereqCivic());
-            ((TextView) rootView.findViewById(R.id.prereq_district)).setText("District: " + building.getPrereqDistrict());
+            ((TextView) rootView.findViewById(R.id.cost)).setText("Cost: " + building.getCost() + " production");
+            ((TextView) rootView.findViewById(R.id.maintenance)).setText("Maintenance: " + building.getMaintenance() + " gold per turn");
 
-            ((TextView) rootView.findViewById(R.id.outer_defense_hit_points)).setText("Hit points: " + building.getOuterDefenseHitPoints());
-            ((TextView) rootView.findViewById(R.id.outer_defense_strength)).setText("Strength: " + building.getOuterDefenseStrength());
+            if (building.getPrereqTech() != null) {
+                ((TextView) rootView.findViewById(R.id.prereq_tech)).setText("Technology: " + building.getPrereqTech());
+
+            } else {
+                rootView.findViewById(R.id.prereq_tech).setVisibility(View.GONE);
+            }
+            if (building.getPrereqCivic() != null) {
+                ((TextView) rootView.findViewById(R.id.prereq_civic)).setText("Civic: " + building.getPrereqCivic());
+
+            } else {
+                rootView.findViewById(R.id.prereq_civic).setVisibility(View.GONE);
+            }
+            if (building.getPrereqDistrict() != null) {
+                ((TextView) rootView.findViewById(R.id.prereq_district)).setText("District: " + building.getPrereqDistrict());
+
+            } else {
+                rootView.findViewById(R.id.prereq_district).setVisibility(View.GONE);
+            }
         }
 
         return rootView;
