@@ -18,7 +18,6 @@ import com.google.android.gms.ads.MobileAds;
 import com.shepherdjerred.civilopedia.civitem.CivItem;
 import com.shepherdjerred.civilopedia.civitem.CivItemDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.CivItemListFragment;
-import com.shepherdjerred.civilopedia.civitem.HomeFragment;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 import com.shepherdjerred.civilopedia.storage.sqlite.SqliteDatastore;
 
@@ -47,6 +46,17 @@ public class MainActivity extends AppCompatActivity
 
         Fragment fragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                Fragment f = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+                if (f instanceof ActionBarFragment) {
+                    getSupportActionBar().setTitle(((ActionBarFragment) f).getToolbarTitle());
+                }
+            }
+        });
+
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .commit();
@@ -91,9 +101,8 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.content_frame, fragment)
-                    .addToBackStack(null)
+                    .addToBackStack(getResources().getString(R.string.app_name))
                     .commit();
-            getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
         } else {
             Datastore datastore = new SqliteDatastore(getApplicationContext());
             ArrayList<? extends CivItem> civItems = null;
@@ -126,14 +135,13 @@ public class MainActivity extends AppCompatActivity
             }
 
             if (civItems != null) {
-                Fragment fragment = CivItemListFragment.newInstance(civItems);
+                Fragment fragment = CivItemListFragment.newInstance(civItems, item.getTitle().toString());
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .replace(R.id.content_frame, fragment)
-                        .addToBackStack(null)
+                        .addToBackStack(item.getTitle().toString())
                         .commit();
-                getSupportActionBar().setTitle(item.getTitle());
             }
         }
 
@@ -151,9 +159,8 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.content_frame, fragment)
-                    .addToBackStack(null)
+                    .addToBackStack(item.getName())
                     .commit();
-            getSupportActionBar().setTitle(item.getName());
         }
     }
 

@@ -49,5 +49,4 @@ public class BuildingDetailsFragment extends CivItemDetailsFragment {
 
         return rootView;
     }
-
 }

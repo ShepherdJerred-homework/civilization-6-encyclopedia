@@ -8,24 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.shepherdjerred.civilopedia.ActionBarFragment;
 import com.shepherdjerred.civilopedia.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CivItemListFragment extends Fragment {
+public class CivItemListFragment extends Fragment implements ActionBarFragment {
 
     private static final String ARG_ITEMS = "civ_items";
+    private static final String ARG_TYPE = "civ_items_type";
     private List<CivItem> civItems;
+    private String civItemsType;
     private OnListFragmentInteractionListener mListener;
 
-    public CivItemListFragment() {
-    }
-
-    public static CivItemListFragment newInstance(ArrayList<? extends CivItem> civItems) {
+    public static CivItemListFragment newInstance(ArrayList<? extends CivItem> civItems, String civItemsType) {
         CivItemListFragment fragment = new CivItemListFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_ITEMS, civItems);
+        args.putString(ARG_TYPE, civItemsType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,6 +37,7 @@ public class CivItemListFragment extends Fragment {
 
         if (getArguments() != null) {
             civItems = getArguments().getParcelableArrayList(ARG_ITEMS);
+            civItemsType = getArguments().getString(ARG_TYPE);
         }
     }
 
@@ -72,5 +74,10 @@ public class CivItemListFragment extends Fragment {
 
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(CivItem item);
+    }
+
+    @Override
+    public String getToolbarTitle() {
+        return civItemsType;
     }
 }

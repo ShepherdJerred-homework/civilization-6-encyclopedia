@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.shepherdjerred.civilopedia.ActionBarFragment;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.building.BuildingDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
@@ -20,7 +21,7 @@ import com.shepherdjerred.civilopedia.civitem.project.ProjectDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 import com.shepherdjerred.civilopedia.civitem.unit.UnitDetailsFragment;
 
-public abstract class CivItemDetailsFragment extends Fragment {
+public abstract class CivItemDetailsFragment extends Fragment implements ActionBarFragment {
 
     private OnFragmentInteractionListener mListener;
 
@@ -89,5 +90,10 @@ public abstract class CivItemDetailsFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onCivItemDetailsFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public String getToolbarTitle() {
+        return civItem.getName();
     }
 }

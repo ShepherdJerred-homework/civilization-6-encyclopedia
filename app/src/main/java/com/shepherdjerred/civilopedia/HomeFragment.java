@@ -1,4 +1,4 @@
-package com.shepherdjerred.civilopedia.civitem;
+package com.shepherdjerred.civilopedia;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.shepherdjerred.civilopedia.R;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ActionBarFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,4 +28,8 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public String getToolbarTitle() {
+        return getResources().getString(R.string.app_name);
+    }
 }
