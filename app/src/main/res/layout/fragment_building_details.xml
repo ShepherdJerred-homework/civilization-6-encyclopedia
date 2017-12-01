@@ -11,6 +11,11 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,13 +24,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="General"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/general"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="description"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
@@ -33,6 +42,8 @@
                 android:id="@+id/cost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="cost"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
@@ -40,26 +51,34 @@
                 android:id="@+id/maintenance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="maintenance"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/prereq"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prerequisites"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/prerequisites"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
             <TextView
                 android:id="@+id/prereq_tech"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="prereq_tech"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
@@ -67,6 +86,8 @@
                 android:id="@+id/prereq_civic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="prereq_civic"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
@@ -74,6 +95,8 @@
                 android:id="@+id/prereq_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="prereq_district"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
         </LinearLayout>

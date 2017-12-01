@@ -32,6 +32,18 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setupActionBar();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        startHomeFragment();
+
+        MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
+    }
+
+    private void setupActionBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,11 +52,10 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+    }
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        Fragment fragment = new HomeFragment();
+    private void startHomeFragment() {
+        Fragment homeFragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
@@ -58,10 +69,8 @@ public class MainActivity extends AppCompatActivity
         });
 
         fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.content_frame, homeFragment)
                 .commit();
-
-        MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
     }
 
     @Override
