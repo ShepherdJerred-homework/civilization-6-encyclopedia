@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity
         CivItemListFragment.OnListFragmentInteractionListener,
         CivItemDetailsFragment.OnFragmentInteractionListener {
 
+    private Datastore datastore;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity
         startHomeFragment();
 
         MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
+
+        datastore = new SqliteDatastore(getApplicationContext());
     }
 
     private void setupActionBar() {
@@ -116,7 +121,6 @@ public class MainActivity extends AppCompatActivity
                     .addToBackStack(getResources().getString(R.string.app_name))
                     .commit();
         } else {
-            Datastore datastore = new SqliteDatastore(getApplicationContext());
             ArrayList<? extends CivItem> civItems = null;
 
             switch (id) {
