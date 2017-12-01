@@ -33,7 +33,8 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Civilizations WHERE StartingCivilizationLevelType == 'CIVILIZATION_LEVEL_FULL_CIV' ORDER BY Name", null);
+        String sql = "SELECT * FROM Civilizations WHERE StartingCivilizationLevelType == 'CIVILIZATION_LEVEL_FULL_CIV' ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
         if (c.moveToFirst()) {
             do {
                 String civilizationType = c.getString(0);
@@ -42,7 +43,6 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Civilization civilization = new Civilization(civilizationType, name, description);
                 civilizations.add(civilization);
-
             } while (c.moveToNext());
         }
         c.close();
@@ -56,7 +56,8 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Leaders WHERE InheritFrom == 'LEADER_DEFAULT' ORDER BY Name", null);
+        String sql = "SELECT * FROM Leaders WHERE InheritFrom == 'LEADER_DEFAULT' ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
         if (c.moveToFirst()) {
             do {
                 String leaderType = c.getString(0);
@@ -64,7 +65,6 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Leader leader = new Leader(leaderType, name);
                 leaders.add(leader);
-
             } while (c.moveToNext());
         }
         c.close();
@@ -78,7 +78,8 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Civilizations WHERE StartingCivilizationLevelType == 'CIVILIZATION_LEVEL_CITY_STATE' ORDER BY Name", null);
+        String sql = "SELECT * FROM Civilizations WHERE StartingCivilizationLevelType == 'CIVILIZATION_LEVEL_CITY_STATE' ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
         if (c.moveToFirst()) {
             do {
                 String civilizationType = c.getString(0);
@@ -101,14 +102,15 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Districts WHERE InternalOnly == 0 AND CityCenter != 1 ORDER BY Name", null);
+        String sql = "SELECT * FROM Districts WHERE InternalOnly == 0 AND CityCenter != 1 ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
         if (c.moveToFirst()) {
             do {
                 String districtType = c.getString(0);
-                String name = c.getString(1);
-                String prereqTech = c.getString(2);
-                String prereqCivic = c.getString(3);
-                String description = c.getString(5);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                String prereqTech = localizationDatastore.getEnglishValue("LOC_" + c.getString(2) + "_NAME");
+                String prereqCivic = localizationDatastore.getEnglishValue("LOC_" + c.getString(3) + "_NAME");
+                String description = localizationDatastore.getEnglishValue("LOC_" + c.getString(5) + "_NAME");
                 int cost = c.getInt(6);
                 int hitPoints = c.getInt(15);
 
@@ -128,7 +130,8 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Buildings WHERE IsWonder == 0 ORDER BY Name", null);
+        String sql = "SELECT * FROM Buildings WHERE IsWonder == 0 ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
         if (c.moveToFirst()) {
             do {
                 String buildingType = c.getString(0);
@@ -156,15 +159,16 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Buildings WHERE IsWonder == 1 ORDER BY Name", null);
+        String sql = "SELECT * FROM Buildings WHERE IsWonder == 1 ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
         if (c.moveToFirst()) {
             do {
                 String buildingType = c.getString(0);
                 String name = localizationDatastore.getEnglishValue(c.getString(1));
-                String prereqTech = localizationDatastore.getEnglishValue("LOC_TECH_" + c.getString(2) + "_NAME");
-                String prereqCivic = localizationDatastore.getEnglishValue("LOC_CIVIC_" + c.getString(3) + "_NAME");
+                String prereqTech = localizationDatastore.getEnglishValue("LOC_" + c.getString(2) + "_NAME");
+                String prereqCivic = localizationDatastore.getEnglishValue("LOC_" + c.getString(3) + "_NAME");
                 int cost = c.getInt(4);
-                String prereqDistrict = localizationDatastore.getEnglishValue("LOC_DISTRICT_" + c.getString(8) + "_NAME");
+                String prereqDistrict = localizationDatastore.getEnglishValue("LOC_" + c.getString(8) + "_NAME");
                 String description = c.getString(10) != null ? localizationDatastore.getEnglishValue(c.getString(10)) : null;
                 int maintenance = c.getInt(22);
 
@@ -184,16 +188,17 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Projects ORDER BY Name", null);
+        String sql = "SELECT * FROM Projects ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
         if (c.moveToFirst()) {
             do {
                 String projectType = c.getString(0);
-                String name = c.getString(1);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
                 String shortName = c.getString(2);
-                String description = c.getString(3);
+                String description = localizationDatastore.getEnglishValue(c.getString(3));
                 int cost = c.getInt(5);
-                String prereqTech = c.getString(8);
-                String prereqDistrict = c.getString(10);
+                String prereqTech = localizationDatastore.getEnglishValue("LOC_" + c.getString(8) + "_NAME");
+                String prereqDistrict = localizationDatastore.getEnglishValue("LOC_" + c.getString(10) + "_NAME");
 
                 Project project = new Project(projectType, name, shortName, description, cost, prereqTech, prereqDistrict);
                 projects.add(project);
@@ -211,13 +216,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM Units ORDER BY Name", null);
+        String sql = "SELECT * FROM Units ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
         if (c.moveToFirst()) {
             do {
                 String unitType = c.getString(0);
-                String name = c.getString(1);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
                 int cost = c.getInt(10);
-                String description = c.getString(24);
+                String description = localizationDatastore.getEnglishValue(c.getString(24));
 
                 Unit unit = new Unit(unitType, name, cost, description);
                 units.add(unit);
@@ -228,6 +234,5 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         sqLiteDatabase.close();
         return units;
     }
-
 
 }
