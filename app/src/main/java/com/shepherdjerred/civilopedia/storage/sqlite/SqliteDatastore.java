@@ -133,10 +133,10 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             do {
                 String buildingType = c.getString(0);
                 String name = localizationDatastore.getEnglishValue(c.getString(1));
-                String prereqTech = localizationDatastore.getEnglishValue("LOC_TECH_" + c.getString(2) + "_NAME");
-                String prereqCivic = localizationDatastore.getEnglishValue("LOC_CIVIC_" + c.getString(3) + "_NAME");
+                String prereqTech = localizationDatastore.getEnglishValue("LOC_" + c.getString(2) + "_NAME");
+                String prereqCivic = localizationDatastore.getEnglishValue("LOC_" + c.getString(3) + "_NAME");
                 int cost = c.getInt(4);
-                String prereqDistrict = localizationDatastore.getEnglishValue("LOC_DISTRICT_" + c.getString(8) + "_NAME");
+                String prereqDistrict = localizationDatastore.getEnglishValue("LOC_" + c.getString(8) + "_NAME");
                 String description = c.getString(10) != null ? localizationDatastore.getEnglishValue(c.getString(10)) : null;
                 int maintenance = c.getInt(22);
 

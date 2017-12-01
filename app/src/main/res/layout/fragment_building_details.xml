@@ -33,8 +33,8 @@
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:text="description"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
@@ -42,8 +42,8 @@
                 android:id="@+id/cost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:text="cost"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
@@ -51,8 +51,8 @@
                 android:id="@+id/maintenance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:text="maintenance"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
         </LinearLayout>
@@ -68,8 +68,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:text="@string/prerequisites"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
@@ -77,8 +77,8 @@
                 android:id="@+id/prereq_tech"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:text="prereq_tech"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
@@ -86,8 +86,8 @@
                 android:id="@+id/prereq_civic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:text="prereq_civic"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
@@ -95,8 +95,8 @@
                 android:id="@+id/prereq_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:text="prereq_district"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1" />
         </LinearLayout>

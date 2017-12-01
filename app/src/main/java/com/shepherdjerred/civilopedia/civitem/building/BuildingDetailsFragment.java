@@ -59,35 +59,37 @@ public class BuildingDetailsFragment extends CivItemDetailsFragment {
 
         if (iconResourceId != 0) {
             icon.setImageDrawable(res.getDrawable(iconResourceId));
+        } else {
+            icon.setVisibility(View.GONE);
         }
 
         if (building.getDescription() != null) {
-            description.setText(res.getString(R.string.description, building.getDescription()));
+            description.setText(res.getString(R.string.description, building.getDescription().replace("[NEWLINE]", "\n")));
         } else {
             description.setVisibility(View.GONE);
         }
 
-        cost.setText("Cost: " + building.getCost() + " production");
-        maintenance.setText("Maintenance: " + building.getMaintenance() + " gold per turn");
+        cost.setText(res.getString(R.string.cost, building.getCost()));
+        maintenance.setText(res.getString(R.string.maintenance, building.getMaintenance()));
 
         if (building.getPrereqTech() == null && building.getPrereqCivic() == null && building.getPrereqDistrict() == null) {
             prereq.setVisibility(View.GONE);
         } else {
 
             if (building.getPrereqTech() != null) {
-                prereqTech.setText("Technology: " + building.getPrereqTech());
+                prereqTech.setText(res.getString(R.string.technology, building.getPrereqTech()));
             } else {
                 prereqTech.setVisibility(View.GONE);
             }
 
             if (building.getPrereqCivic() != null) {
-                prereqCivic.setText("Civic: " + building.getPrereqCivic());
+                prereqCivic.setText(res.getString(R.string.civic, building.getPrereqCivic()));
             } else {
                 prereqCivic.setVisibility(View.GONE);
             }
 
             if (building.getPrereqDistrict() != null) {
-                prereqDistrict.setText("District: " + building.getPrereqDistrict());
+                prereqDistrict.setText(res.getString(R.string.district, building.getPrereqDistrict()));
             } else {
                 prereqDistrict.setVisibility(View.GONE);
             }

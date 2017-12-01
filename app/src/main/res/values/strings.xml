@@ -12,4 +12,9 @@
     <string name="prerequisites">Prerequisites</string>
 
     <string name="description">Description\n %s</string>
+    <string name="cost">Cost: %d production</string>
+    <string name="maintenance">Maintenance: %d gold per turn</string>
+    <string name="technology">Technology: %s</string>
+    <string name="civic">Civic: %s</string>
+    <string name="district">District: %s</string>
 </resources>

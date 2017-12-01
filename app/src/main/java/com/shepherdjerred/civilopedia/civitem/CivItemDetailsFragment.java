@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.shepherdjerred.civilopedia.ActionBarFragment;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
@@ -29,6 +30,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
     protected CivItem civItem;
 
     public static CivItemDetailsFragment newInstance(CivItem civItem) {
+
+        Log.d("CivItem", civItem.toString());
 
         CivItemDetailsFragment civItemDetailsFragment;
 
