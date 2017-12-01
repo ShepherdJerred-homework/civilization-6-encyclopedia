@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+import com.shepherdjerred.civilopedia.civitem.CivItem;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
@@ -22,14 +23,104 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private static final int DATABASE_VERSION = 1;
     private LocalizationDatastore localizationDatastore;
 
+    private ArrayList<CivItem> civItems;
+    private ArrayList<Civilization> civilizations;
+    private ArrayList<Leader> leaders;
+    private ArrayList<CityState> cityStates;
+    private ArrayList<District> districts;
+    private ArrayList<Building> buildings;
+    private ArrayList<Building> wonders;
+    private ArrayList<Project> projects;
+    private ArrayList<Unit> units;
+
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         localizationDatastore = new LocalizationDatastore(context);
     }
 
     @Override
+    public ArrayList<CivItem> getCivItems() {
+        if (civItems == null) {
+            civItems = new ArrayList<>();
+            civItems.addAll(getCivilizations());
+            civItems.addAll(getLeaders());
+            civItems.addAll(getCityStates());
+            civItems.addAll(getDistricts());
+            civItems.addAll(getBuildings());
+            civItems.addAll(getWonders());
+            civItems.addAll(getProjects());
+            civItems.addAll(getUnits());
+        }
+        return civItems;
+    }
+
+    @Override
+    public ArrayList<Building> getBuildings() {
+        if (buildings == null) {
+            loadBuildings();
+        }
+        return buildings;
+    }
+
+    @Override
     public ArrayList<Civilization> getCivilizations() {
-        ArrayList<Civilization> civilizations = new ArrayList<>();
+        if (civilizations == null) {
+            loadCivilizations();
+        }
+        return civilizations;
+    }
+
+    @Override
+    public ArrayList<Leader> getLeaders() {
+        if (leaders == null) {
+            loadLeaders();
+        }
+        return leaders;
+    }
+
+    @Override
+    public ArrayList<CityState> getCityStates() {
+        if (cityStates == null) {
+            loadCityStates();
+        }
+        return cityStates;
+    }
+
+    @Override
+    public ArrayList<District> getDistricts() {
+        if (districts == null) {
+            loadDistricts();
+        }
+        return districts;
+    }
+
+    @Override
+    public ArrayList<Building> getWonders() {
+        if (wonders == null) {
+            loadWonders();
+        }
+        return wonders;
+    }
+
+    @Override
+    public ArrayList<Project> getProjects() {
+        if (projects == null) {
+            loadProjects();
+        }
+        return projects;
+    }
+
+    @Override
+    public ArrayList<Unit> getUnits() {
+        if (units == null) {
+            loadUnits();
+        }
+        return units;
+    }
+
+
+    private void loadCivilizations() {
+        civilizations = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
@@ -47,12 +138,10 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         }
         c.close();
         sqLiteDatabase.close();
-        return civilizations;
     }
 
-    @Override
-    public ArrayList<Leader> getLeaders() {
-        ArrayList<Leader> leaders = new ArrayList<>();
+    private void loadLeaders() {
+        leaders = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
@@ -69,12 +158,10 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         }
         c.close();
         sqLiteDatabase.close();
-        return leaders;
     }
 
-    @Override
-    public ArrayList<CityState> getCityStates() {
-        ArrayList<CityState> cityStates = new ArrayList<>();
+    private void loadCityStates() {
+        cityStates = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
@@ -93,12 +180,10 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         }
         c.close();
         sqLiteDatabase.close();
-        return cityStates;
     }
 
-    @Override
-    public ArrayList<District> getDistricts() {
-        ArrayList<District> districts = new ArrayList<>();
+    private void loadDistricts() {
+        districts = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
@@ -121,12 +206,10 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         }
         c.close();
         sqLiteDatabase.close();
-        return districts;
     }
 
-    @Override
-    public ArrayList<Building> getBuildings() {
-        ArrayList<Building> buildings = new ArrayList<>();
+    private void loadBuildings() {
+        buildings = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
@@ -150,12 +233,10 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         }
         c.close();
         sqLiteDatabase.close();
-        return buildings;
     }
 
-    @Override
-    public ArrayList<Building> getWonders() {
-        ArrayList<Building> wonders = new ArrayList<>();
+    private void loadWonders() {
+        wonders = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
@@ -179,12 +260,10 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         }
         c.close();
         sqLiteDatabase.close();
-        return wonders;
     }
 
-    @Override
-    public ArrayList<Project> getProjects() {
-        ArrayList<Project> projects = new ArrayList<>();
+    private void loadProjects() {
+        projects = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
@@ -207,12 +286,10 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         }
         c.close();
         sqLiteDatabase.close();
-        return projects;
     }
 
-    @Override
-    public ArrayList<Unit> getUnits() {
-        ArrayList<Unit> units = new ArrayList<>();
+    private void loadUnits() {
+        units = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
@@ -232,7 +309,6 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         }
         c.close();
         sqLiteDatabase.close();
-        return units;
     }
 
 }
