@@ -1,6 +1,5 @@
 package com.shepherdjerred.civilopedia;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.android.billingclient.api.BillingClient;
 import com.google.android.gms.ads.MobileAds;
 import com.shepherdjerred.civilopedia.civitem.CivItem;
 import com.shepherdjerred.civilopedia.civitem.CivItemDetailsFragment;
@@ -27,10 +27,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         CivItemListFragment.OnListFragmentInteractionListener,
-        CivItemDetailsFragment.OnFragmentInteractionListener {
+        CivItemDetailsFragment.OnFragmentInteractionListener
+{
 
+    private BillingClient mBillingClient;
     private Datastore datastore;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,13 +99,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
+        
         return super.onOptionsItemSelected(item);
     }
 

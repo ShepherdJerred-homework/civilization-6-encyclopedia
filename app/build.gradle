@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.billingclient:billing:1.0'
     compile 'com.google.firebase:firebase-core:11.6.2'
     compile 'com.google.firebase:firebase-ads:11.6.2'
     compileOnly 'org.projectlombok:lombok:1.16.18'
