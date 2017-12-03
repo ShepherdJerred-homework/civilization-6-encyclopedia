@@ -11,6 +11,7 @@ import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.district.District;
+import com.shepherdjerred.civilopedia.civitem.feature.Feature;
 import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
@@ -38,6 +39,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Route> routes;
     private ArrayList<Improvement> improvements;
     private ArrayList<Resource> resources;
+    private ArrayList<Feature> features;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -59,6 +61,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getRoutes());
             civItems.addAll(getImprovements());
             civItems.addAll(getResources());
+            civItems.addAll(getFeatures());
         }
         return civItems;
     }
@@ -149,6 +152,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             loadResources();
         }
         return resources;
+    }
+
+    @Override
+    public ArrayList<Feature> getFeatures() {
+        if (features == null) {
+            loadFeatures();
+        }
+        return features;
     }
 
     private void loadCivilizations() {
@@ -403,6 +414,28 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Resource resource = new Resource(resourceType, name, frequency);
                 resources.add(resource);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
+
+    private void loadFeatures() {
+        features = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM Features ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            do {
+                String featureType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                String description = localizationDatastore.getEnglishValue(c.getString(2));
+
+                Feature feature = new Feature(featureType, name, description);
+                features.add(feature);
 
             } while (c.moveToNext());
         }

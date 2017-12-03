@@ -6,6 +6,7 @@ import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.district.District;
+import com.shepherdjerred.civilopedia.civitem.feature.Feature;
 import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
@@ -38,4 +39,6 @@ public interface Datastore {
     ArrayList<Improvement> getImprovements();
 
     ArrayList<Resource> getResources();
+
+    ArrayList<Feature> getFeatures();
 }

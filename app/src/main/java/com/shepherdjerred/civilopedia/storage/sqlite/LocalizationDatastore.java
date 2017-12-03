@@ -16,14 +16,17 @@ public class LocalizationDatastore extends SQLiteAssetHelper {
     }
 
     public String getEnglishValue(String tag) {
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT Text FROM EnglishText WHERE Tag = ?", new String[]{tag});
-        if (c.moveToFirst()) {
-            return c.getString(0);
+        if (tag != null) {
+            SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+            Cursor c = sqLiteDatabase.rawQuery("SELECT Text FROM EnglishText WHERE Tag = ?", new String[]{tag});
+            if (c.moveToFirst()) {
+                return c.getString(0);
+            }
+            c.close();
+            sqLiteDatabase.close();
         }
-        c.close();
-        sqLiteDatabase.close();
         return null;
     }
 
