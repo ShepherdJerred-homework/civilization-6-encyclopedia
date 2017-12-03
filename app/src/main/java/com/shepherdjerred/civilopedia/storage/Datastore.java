@@ -10,6 +10,7 @@ import com.shepherdjerred.civilopedia.civitem.feature.Feature;
 import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
+import com.shepherdjerred.civilopedia.civitem.religion.Religion;
 import com.shepherdjerred.civilopedia.civitem.route.Route;
 import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
@@ -44,4 +45,6 @@ public interface Datastore {
     ArrayList<Feature> getFeatures();
 
     ArrayList<Terrain> getTerrains();
+
+    ArrayList<Religion> getReligions();
 }

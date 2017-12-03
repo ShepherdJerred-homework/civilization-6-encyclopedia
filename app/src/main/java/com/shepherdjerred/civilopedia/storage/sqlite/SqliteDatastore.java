@@ -15,12 +15,14 @@ import com.shepherdjerred.civilopedia.civitem.feature.Feature;
 import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
+import com.shepherdjerred.civilopedia.civitem.religion.Religion;
 import com.shepherdjerred.civilopedia.civitem.route.Route;
 import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
@@ -42,6 +44,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Resource> resources;
     private ArrayList<Feature> features;
     private ArrayList<Terrain> terrains;
+    private ArrayList<Religion> religions;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -65,6 +68,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getResources());
             civItems.addAll(getFeatures());
             civItems.addAll(getTerrains());
+            civItems.addAll(getReligions());
         }
         return civItems;
     }
@@ -171,6 +175,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             loadTerrains();
         }
         return terrains;
+    }
+
+    @Override
+    public ArrayList<Religion> getReligions() {
+        if (religions == null) {
+            loadReligions();
+        }
+        return religions;
     }
 
     private void loadCivilizations() {
@@ -470,6 +482,35 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Terrain terrain = new Terrain(terrainType, name, influenceCost, movementCost);
                 terrains.add(terrain);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
+
+    private void loadReligions() {
+        religions = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM Religions ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            boolean customReligionDisplayed = false;
+            do {
+                String religionType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+
+                if (Objects.equals(name, "Custom Religion") && !customReligionDisplayed) {
+                    customReligionDisplayed = true;
+                    Religion religion = new Religion(religionType, name);
+                    religions.add(religion);
+                }
+                else if (!Objects.equals(name, "Custom Religion")) {
+                    Religion religion = new Religion(religionType, name);
+                    religions.add(religion);
+                }
 
             } while (c.moveToNext());
         }
