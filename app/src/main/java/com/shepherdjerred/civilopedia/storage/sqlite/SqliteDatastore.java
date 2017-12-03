@@ -12,6 +12,7 @@ import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.district.District;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
+import com.shepherdjerred.civilopedia.civitem.route.Route;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 
@@ -32,6 +33,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Building> wonders;
     private ArrayList<Project> projects;
     private ArrayList<Unit> units;
+    private ArrayList<Route> routes;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -50,6 +52,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getWonders());
             civItems.addAll(getProjects());
             civItems.addAll(getUnits());
+            civItems.addAll(getRoutes());
         }
         return civItems;
     }
@@ -118,6 +121,13 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         return units;
     }
 
+    @Override
+    public ArrayList<Route> getRoutes() {
+        if (routes == null) {
+            loadRoutes();
+        }
+        return routes;
+    }
 
     private void loadCivilizations() {
         civilizations = new ArrayList<>();
@@ -311,4 +321,26 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
         sqLiteDatabase.close();
     }
 
+    private void loadRoutes() {
+        routes = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM Routes ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            do {
+                String routeType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                int cost = c.getInt(3);
+                String description = localizationDatastore.getEnglishValue(c.getString(2));
+
+                Route route = new Route(routeType, name, description, cost);
+                routes.add(route);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
 }

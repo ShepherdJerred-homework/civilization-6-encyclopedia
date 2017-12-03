@@ -18,4 +18,7 @@
     <string name="search">Search</string>
     <string name="civilopedia_for_civilization_6">Civilopedia for Civilization 6</string>
     <string name="title_activity_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -19,6 +19,8 @@ import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.leader.LeaderDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
 import com.shepherdjerred.civilopedia.civitem.project.ProjectDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.route.Route;
+import com.shepherdjerred.civilopedia.civitem.route.RouteDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 import com.shepherdjerred.civilopedia.civitem.unit.UnitDetailsFragment;
 
@@ -49,6 +51,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
             civItemDetailsFragment = new ProjectDetailsFragment();
         } else if (civItem instanceof Unit) {
             civItemDetailsFragment = new UnitDetailsFragment();
+        } else if (civItem instanceof Route) {
+            civItemDetailsFragment = new RouteDetailsFragment();
         } else {
             throw new UnsupportedOperationException();
         }
