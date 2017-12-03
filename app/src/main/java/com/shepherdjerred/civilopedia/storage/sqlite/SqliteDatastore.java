@@ -12,6 +12,7 @@ import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.district.District;
 import com.shepherdjerred.civilopedia.civitem.feature.Feature;
+import com.shepherdjerred.civilopedia.civitem.government.Government;
 import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.policy.Policy;
@@ -47,6 +48,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Terrain> terrains;
     private ArrayList<Religion> religions;
     private ArrayList<Policy> policies;
+    private ArrayList<Government> governments;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -72,6 +74,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getTerrains());
             civItems.addAll(getReligions());
             civItems.addAll(getPolicies());
+            civItems.addAll(getGovernments());
         }
         return civItems;
     }
@@ -194,6 +197,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             loadPolicies();
         }
         return policies;
+    }
+
+    @Override
+    public ArrayList<Government> getGovernments() {
+        if (governments == null) {
+            loadGovernments();
+        }
+        return governments;
     }
 
     private void loadCivilizations() {
@@ -544,6 +555,29 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Policy policy = new Policy(unitType, name, description);
                 policies.add(policy);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
+
+    private void loadGovernments() {
+        governments = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM Governments ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            do {
+                String governmentType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                String inherentDescription = localizationDatastore.getEnglishValue(c.getString(3));
+                String accumulatedDescription = localizationDatastore.getEnglishValue(c.getString(5));
+
+                Government government = new Government(governmentType, name, inherentDescription, accumulatedDescription);
+                governments.add(government);
 
             } while (c.moveToNext());
         }

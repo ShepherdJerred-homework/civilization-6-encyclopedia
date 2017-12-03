@@ -19,6 +19,8 @@ import com.shepherdjerred.civilopedia.civitem.district.District;
 import com.shepherdjerred.civilopedia.civitem.district.DistrictDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.feature.Feature;
 import com.shepherdjerred.civilopedia.civitem.feature.FeatureDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.government.Government;
+import com.shepherdjerred.civilopedia.civitem.government.GovernmentDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.improvements.ImprovementDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
@@ -77,6 +79,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
             civItemDetailsFragment = new ReligionDetailsFragment();
         } else if (civItem instanceof Policy) {
             civItemDetailsFragment = new PolicyDetailsFragment();
+        } else if (civItem instanceof Government) {
+            civItemDetailsFragment = new GovernmentDetailsFragment();
         } else {
             throw new UnsupportedOperationException();
         }
