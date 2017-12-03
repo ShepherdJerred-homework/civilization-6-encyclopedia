@@ -15,6 +15,8 @@ import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.civilization.CivilizationDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.district.District;
 import com.shepherdjerred.civilopedia.civitem.district.DistrictDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
+import com.shepherdjerred.civilopedia.civitem.improvements.ImprovementDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.leader.LeaderDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
@@ -53,6 +55,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
             civItemDetailsFragment = new UnitDetailsFragment();
         } else if (civItem instanceof Route) {
             civItemDetailsFragment = new RouteDetailsFragment();
+        } else if (civItem instanceof Improvement) {
+            civItemDetailsFragment = new ImprovementDetailsFragment();
         } else {
             throw new UnsupportedOperationException();
         }

@@ -10,6 +10,7 @@ import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.district.District;
+import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
 import com.shepherdjerred.civilopedia.civitem.route.Route;
@@ -34,6 +35,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Project> projects;
     private ArrayList<Unit> units;
     private ArrayList<Route> routes;
+    private ArrayList<Improvement> improvements;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -53,6 +55,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getProjects());
             civItems.addAll(getUnits());
             civItems.addAll(getRoutes());
+            civItems.addAll(getImprovements());
         }
         return civItems;
     }
@@ -127,6 +130,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             loadRoutes();
         }
         return routes;
+    }
+
+    @Override
+    public ArrayList<Improvement> getImprovements() {
+        if (improvements == null) {
+            loadImprovements();
+        }
+        return improvements;
     }
 
     private void loadCivilizations() {
@@ -337,6 +348,28 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Route route = new Route(routeType, name, description, cost);
                 routes.add(route);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
+
+    private void loadImprovements() {
+        improvements = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM Improvements ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            do {
+                String improvementType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                String description = localizationDatastore.getEnglishValue(c.getString(6));
+
+                Improvement improvement = new Improvement(improvementType, name, description);
+                improvements.add(improvement);
 
             } while (c.moveToNext());
         }
