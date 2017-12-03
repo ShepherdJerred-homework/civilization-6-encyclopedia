@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.shepherdjerred.civilopedia.civitem.CivItem;
+import com.shepherdjerred.civilopedia.civitem.Resources.Resource;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
@@ -36,6 +37,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Unit> units;
     private ArrayList<Route> routes;
     private ArrayList<Improvement> improvements;
+    private ArrayList<Resource> resources;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -56,6 +58,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getUnits());
             civItems.addAll(getRoutes());
             civItems.addAll(getImprovements());
+            civItems.addAll(getResources());
         }
         return civItems;
     }
@@ -138,6 +141,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             loadImprovements();
         }
         return improvements;
+    }
+
+    @Override
+    public ArrayList<Resource> getResources() {
+        if (resources == null) {
+            loadResources();
+        }
+        return resources;
     }
 
     private void loadCivilizations() {
@@ -370,6 +381,28 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Improvement improvement = new Improvement(improvementType, name, description);
                 improvements.add(improvement);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
+
+    private void loadResources() {
+        resources = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM Resources ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            do {
+                String resourceType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                int frequency = c.getInt(6);
+
+                Resource resource = new Resource(resourceType, name, frequency);
+                resources.add(resource);
 
             } while (c.moveToNext());
         }

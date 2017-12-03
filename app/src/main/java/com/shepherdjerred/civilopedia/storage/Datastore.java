@@ -1,6 +1,7 @@
 package com.shepherdjerred.civilopedia.storage;
 
 import com.shepherdjerred.civilopedia.civitem.CivItem;
+import com.shepherdjerred.civilopedia.civitem.Resources.Resource;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
@@ -35,4 +36,6 @@ public interface Datastore {
     ArrayList<Route> getRoutes();
 
     ArrayList<Improvement> getImprovements();
+
+    ArrayList<Resource> getResources();
 }

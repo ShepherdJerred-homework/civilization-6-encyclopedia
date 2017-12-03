@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.shepherdjerred.civilopedia.ActionBarFragment;
+import com.shepherdjerred.civilopedia.civitem.Resources.Resource;
+import com.shepherdjerred.civilopedia.civitem.Resources.ResourceDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.building.BuildingDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
@@ -57,6 +59,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
             civItemDetailsFragment = new RouteDetailsFragment();
         } else if (civItem instanceof Improvement) {
             civItemDetailsFragment = new ImprovementDetailsFragment();
+        } else if (civItem instanceof Resource) {
+            civItemDetailsFragment = new ResourceDetailsFragment();
         } else {
             throw new UnsupportedOperationException();
         }
