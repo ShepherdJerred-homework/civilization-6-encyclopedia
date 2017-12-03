@@ -16,6 +16,7 @@ import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
 import com.shepherdjerred.civilopedia.civitem.route.Route;
+import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 
@@ -40,6 +41,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Improvement> improvements;
     private ArrayList<Resource> resources;
     private ArrayList<Feature> features;
+    private ArrayList<Terrain> terrains;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,6 +64,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getImprovements());
             civItems.addAll(getResources());
             civItems.addAll(getFeatures());
+            civItems.addAll(getTerrains());
         }
         return civItems;
     }
@@ -160,6 +163,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             loadFeatures();
         }
         return features;
+    }
+
+    @Override
+    public ArrayList<Terrain> getTerrains() {
+        if (terrains == null) {
+            loadTerrains();
+        }
+        return terrains;
     }
 
     private void loadCivilizations() {
@@ -436,6 +447,29 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Feature feature = new Feature(featureType, name, description);
                 features.add(feature);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
+
+    private void loadTerrains() {
+        terrains = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM Terrains ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            do {
+                String terrainType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                int influenceCost = c.getInt(5);
+                int movementCost = c.getInt(6);
+
+                Terrain terrain = new Terrain(terrainType, name, influenceCost, movementCost);
+                terrains.add(terrain);
 
             } while (c.moveToNext());
         }

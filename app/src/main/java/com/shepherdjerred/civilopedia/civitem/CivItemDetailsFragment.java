@@ -27,6 +27,8 @@ import com.shepherdjerred.civilopedia.civitem.project.Project;
 import com.shepherdjerred.civilopedia.civitem.project.ProjectDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.route.Route;
 import com.shepherdjerred.civilopedia.civitem.route.RouteDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
+import com.shepherdjerred.civilopedia.civitem.terrain.TerrainDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 import com.shepherdjerred.civilopedia.civitem.unit.UnitDetailsFragment;
 
@@ -65,6 +67,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
             civItemDetailsFragment = new ResourceDetailsFragment();
         } else if (civItem instanceof Feature) {
             civItemDetailsFragment = new FeatureDetailsFragment();
+        } else if (civItem instanceof Terrain) {
+            civItemDetailsFragment = new TerrainDetailsFragment();
         } else {
             throw new UnsupportedOperationException();
         }

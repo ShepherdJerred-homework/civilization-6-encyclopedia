@@ -11,6 +11,7 @@ import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
 import com.shepherdjerred.civilopedia.civitem.route.Route;
+import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 
 import java.util.ArrayList;
@@ -41,4 +42,6 @@ public interface Datastore {
     ArrayList<Resource> getResources();
 
     ArrayList<Feature> getFeatures();
+
+    ArrayList<Terrain> getTerrains();
 }

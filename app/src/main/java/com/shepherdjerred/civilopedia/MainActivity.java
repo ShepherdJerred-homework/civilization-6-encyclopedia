@@ -155,6 +155,9 @@ public class MainActivity extends AppCompatActivity
                 case R.id.nav_features:
                     civItems = datastore.getFeatures();
                     break;
+                case R.id.nav_terrain:
+                    civItems = datastore.getTerrains();
+                    break;
             }
 
             if (civItems != null) {
