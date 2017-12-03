@@ -35,6 +35,8 @@ import com.shepherdjerred.civilopedia.civitem.religion.Religion;
 import com.shepherdjerred.civilopedia.civitem.religion.ReligionDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.route.Route;
 import com.shepherdjerred.civilopedia.civitem.route.RouteDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.technology.Technology;
+import com.shepherdjerred.civilopedia.civitem.technology.TechnologyDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.terrain.TerrainDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
@@ -85,6 +87,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
             civItemDetailsFragment = new GovernmentDetailsFragment();
         } else if (civItem instanceof Civic) {
             civItemDetailsFragment = new CivicDetailsFragment();
+        } else if (civItem instanceof Technology) {
+            civItemDetailsFragment = new TechnologyDetailsFragment();
         } else {
             throw new UnsupportedOperationException();
         }

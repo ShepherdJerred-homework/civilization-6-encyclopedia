@@ -15,6 +15,7 @@ import com.shepherdjerred.civilopedia.civitem.policy.Policy;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
 import com.shepherdjerred.civilopedia.civitem.religion.Religion;
 import com.shepherdjerred.civilopedia.civitem.route.Route;
+import com.shepherdjerred.civilopedia.civitem.technology.Technology;
 import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 
@@ -56,4 +57,6 @@ public interface Datastore {
     ArrayList<Government> getGovernments();
 
     ArrayList<Civic> getCivics();
+
+    ArrayList<Technology> getTechnologies();
 }

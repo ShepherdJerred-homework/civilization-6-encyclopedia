@@ -20,6 +20,7 @@ import com.shepherdjerred.civilopedia.civitem.policy.Policy;
 import com.shepherdjerred.civilopedia.civitem.project.Project;
 import com.shepherdjerred.civilopedia.civitem.religion.Religion;
 import com.shepherdjerred.civilopedia.civitem.route.Route;
+import com.shepherdjerred.civilopedia.civitem.technology.Technology;
 import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 import com.shepherdjerred.civilopedia.storage.Datastore;
@@ -51,6 +52,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Policy> policies;
     private ArrayList<Government> governments;
     private ArrayList<Civic> civics;
+    private ArrayList<Technology> technologies;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -78,6 +80,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getPolicies());
             civItems.addAll(getGovernments());
             civItems.addAll(getCivics());
+            civItems.addAll(getTechnologies());
         }
         return civItems;
     }
@@ -216,6 +219,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             loadCivics();
         }
         return civics;
+    }
+
+    @Override
+    public ArrayList<Technology> getTechnologies() {
+        if (technologies == null) {
+            loadTechnologies();
+        }
+        return technologies;
     }
 
     private void loadCivilizations() {
@@ -612,6 +623,29 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Civic civic = new Civic(civicType, name, cost, description);
                 civics.add(civic);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
+
+    private void loadTechnologies() {
+        technologies = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM Technologies ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            do {
+                String technologyType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                int cost = c.getInt(2);
+                String description = localizationDatastore.getEnglishValue(c.getString(6));
+
+                Technology technology = new Technology(technologyType, name, cost, description);
+                technologies.add(technology);
 
             } while (c.moveToNext());
         }
