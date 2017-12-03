@@ -4,6 +4,7 @@ import com.shepherdjerred.civilopedia.civitem.CivItem;
 import com.shepherdjerred.civilopedia.civitem.Resources.Resource;
 import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
+import com.shepherdjerred.civilopedia.civitem.civic.Civic;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.district.District;
 import com.shepherdjerred.civilopedia.civitem.feature.Feature;
@@ -53,4 +54,6 @@ public interface Datastore {
     ArrayList<Policy> getPolicies();
 
     ArrayList<Government> getGovernments();
+
+    ArrayList<Civic> getCivics();
 }

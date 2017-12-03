@@ -13,6 +13,8 @@ import com.shepherdjerred.civilopedia.civitem.building.Building;
 import com.shepherdjerred.civilopedia.civitem.building.BuildingDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityState;
 import com.shepherdjerred.civilopedia.civitem.citystate.CityStateDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.civic.Civic;
+import com.shepherdjerred.civilopedia.civitem.civic.CivicDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.civilization.CivilizationDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.district.District;
@@ -81,6 +83,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
             civItemDetailsFragment = new PolicyDetailsFragment();
         } else if (civItem instanceof Government) {
             civItemDetailsFragment = new GovernmentDetailsFragment();
+        } else if (civItem instanceof Civic) {
+            civItemDetailsFragment = new CivicDetailsFragment();
         } else {
             throw new UnsupportedOperationException();
         }
