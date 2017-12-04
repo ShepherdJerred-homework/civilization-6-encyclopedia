@@ -1,5 +1,10 @@
 package com.shepherdjerred.civilopedia;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,16 +18,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.billingclient.api.BillingClient;
 import com.google.android.gms.ads.MobileAds;
 import com.shepherdjerred.civilopedia.civitem.CivItem;
 import com.shepherdjerred.civilopedia.civitem.CivItemDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.CivItemListFragment;
+import com.shepherdjerred.civilopedia.civitem.civic.CivicDetailsFragment;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 import com.shepherdjerred.civilopedia.storage.sqlite.SqliteDatastore;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -33,6 +41,63 @@ public class MainActivity extends AppCompatActivity
     private BillingClient mBillingClient;
     private Datastore datastore;
 
+    /* put this into your activity class */
+    private SensorManager mSensorManager;
+    private float mAccel; // acceleration apart from gravity
+    private float mAccelCurrent; // current acceleration including gravity
+    private float mAccelLast; // last acceleration including gravity
+
+    private final SensorEventListener mSensorListener = new SensorEventListener() {
+
+        public void onSensorChanged(SensorEvent se) {
+            float x = se.values[0];
+            float y = se.values[1];
+            float z = se.values[2];
+            mAccelLast = mAccelCurrent;
+            mAccelCurrent = (float) Math.sqrt((double) (x*x + y*y + z*z));
+            float delta = mAccelCurrent - mAccelLast;
+            mAccel = mAccel * 0.9f + delta; // perform low-cut filter
+            if (mAccel > 1) {
+//                ArrayList<CivItem> items = datastore.getCivItems();
+//                Random r = new Random();
+//                int randomNumber = r.nextInt(20);
+//                Fragment fragment = CivItemDetailsFragment.newInstance(items.get(randomNumber));
+//
+//                if (fragment != null) {
+//                    FragmentManager fragmentManager = getSupportFragmentManager();
+//                    fragmentManager.beginTransaction()
+//                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                            .replace(R.id.content_frame, fragment)
+//                            .addToBackStack(items.get(randomNumber).getName())
+//                            .commit();
+//                }
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                if (!drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+                else {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+            }
+        }
+
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(mSensorListener);
+        super.onPause();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +107,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        /* do this in onCreate */
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        mAccel = 0.00f;
+        mAccelCurrent = SensorManager.GRAVITY_EARTH;
+        mAccelLast = SensorManager.GRAVITY_EARTH;
 
         startHomeFragment();
 
