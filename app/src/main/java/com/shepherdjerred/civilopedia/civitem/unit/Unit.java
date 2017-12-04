@@ -13,6 +13,12 @@ public class Unit implements CivItem {
     private String unitType;
     private String name;
     private int cost;
+    private int baseSightRange;
+    private int baseMoves;
+    private int combat;
+    private int rangedCombat;
+    private int range;
+    private int bombard;
     private String description;
 
 
@@ -33,6 +39,12 @@ public class Unit implements CivItem {
         this.unitType = in.readString();
         this.name = in.readString();
         this.cost = in.readInt();
+        this.baseSightRange = in.readInt();
+        this.baseMoves = in.readInt();
+        this.combat = in.readInt();
+        this.rangedCombat = in.readInt();
+        this.range = in.readInt();
+        this.bombard = in.readInt();
         this.description = in.readString();
     }
 

@@ -431,10 +431,16 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             do {
                 String unitType = c.getString(0);
                 String name = localizationDatastore.getEnglishValue(c.getString(1));
+                int baseSightRange = c.getInt(2);
+                int baseMoves = c.getInt(3);
+                int combat = c.getInt(4);
+                int rangedCombat = c.getInt(5);
+                int range = c.getInt(6);
+                int bombard = c.getInt(7);
                 int cost = c.getInt(10);
                 String description = localizationDatastore.getEnglishValue(c.getString(24));
 
-                Unit unit = new Unit(unitType, name, cost, description);
+                Unit unit = new Unit(unitType, name, cost, baseSightRange, baseMoves, combat, rangedCombat, range, bombard, description);
                 units.add(unit);
 
             } while (c.moveToNext());
