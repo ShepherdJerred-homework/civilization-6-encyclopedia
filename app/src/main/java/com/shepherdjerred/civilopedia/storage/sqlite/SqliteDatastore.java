@@ -14,6 +14,7 @@ import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.district.District;
 import com.shepherdjerred.civilopedia.civitem.feature.Feature;
 import com.shepherdjerred.civilopedia.civitem.government.Government;
+import com.shepherdjerred.civilopedia.civitem.great_person.GreatPerson;
 import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.policy.Policy;
@@ -53,6 +54,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Government> governments;
     private ArrayList<Civic> civics;
     private ArrayList<Technology> technologies;
+    private ArrayList<GreatPerson> greatPeople;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -81,6 +83,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getGovernments());
             civItems.addAll(getCivics());
             civItems.addAll(getTechnologies());
+            civItems.addAll(getGreatPeople());
         }
         return civItems;
     }
@@ -227,6 +230,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             loadTechnologies();
         }
         return technologies;
+    }
+
+    @Override
+    public ArrayList<GreatPerson> getGreatPeople() {
+        if (greatPeople == null) {
+            loadGreatPeople();
+        }
+        return greatPeople;
     }
 
     private void loadCivilizations() {
@@ -646,6 +657,29 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 Technology technology = new Technology(technologyType, name, cost, description);
                 technologies.add(technology);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
+
+    private void loadGreatPeople() {
+        greatPeople = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM GreatPersonIndividuals ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            do {
+                String greatPersonType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                String classType = localizationDatastore.getEnglishValue("LOC_" + c.getString(2) + "_NAME");
+                String gender = c.getString(29);
+
+                GreatPerson greatPerson = new GreatPerson(greatPersonType, name, classType, gender);
+                greatPeople.add(greatPerson);
 
             } while (c.moveToNext());
         }

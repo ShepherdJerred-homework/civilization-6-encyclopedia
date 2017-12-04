@@ -23,6 +23,8 @@ import com.shepherdjerred.civilopedia.civitem.feature.Feature;
 import com.shepherdjerred.civilopedia.civitem.feature.FeatureDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.government.Government;
 import com.shepherdjerred.civilopedia.civitem.government.GovernmentDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.great_person.GreatPerson;
+import com.shepherdjerred.civilopedia.civitem.great_person.GreatPersonDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.improvements.ImprovementDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
@@ -89,6 +91,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
             civItemDetailsFragment = new CivicDetailsFragment();
         } else if (civItem instanceof Technology) {
             civItemDetailsFragment = new TechnologyDetailsFragment();
+        } else if (civItem instanceof GreatPerson) {
+            civItemDetailsFragment = new GreatPersonDetailsFragment();
         } else {
             throw new UnsupportedOperationException();
         }

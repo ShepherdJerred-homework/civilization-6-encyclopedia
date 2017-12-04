@@ -9,6 +9,7 @@ import com.shepherdjerred.civilopedia.civitem.civilization.Civilization;
 import com.shepherdjerred.civilopedia.civitem.district.District;
 import com.shepherdjerred.civilopedia.civitem.feature.Feature;
 import com.shepherdjerred.civilopedia.civitem.government.Government;
+import com.shepherdjerred.civilopedia.civitem.great_person.GreatPerson;
 import com.shepherdjerred.civilopedia.civitem.improvements.Improvement;
 import com.shepherdjerred.civilopedia.civitem.leader.Leader;
 import com.shepherdjerred.civilopedia.civitem.policy.Policy;
@@ -59,4 +60,6 @@ public interface Datastore {
     ArrayList<Civic> getCivics();
 
     ArrayList<Technology> getTechnologies();
+
+    ArrayList<GreatPerson> getGreatPeople();
 }
