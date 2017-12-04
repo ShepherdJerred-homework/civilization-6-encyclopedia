@@ -43,6 +43,8 @@ import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.terrain.TerrainDetailsFragment;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
 import com.shepherdjerred.civilopedia.civitem.unit.UnitDetailsFragment;
+import com.shepherdjerred.civilopedia.civitem.unit_promotion.UnitPromotion;
+import com.shepherdjerred.civilopedia.civitem.unit_promotion.UnitPromotionDetailsFragment;
 
 public abstract class CivItemDetailsFragment extends Fragment implements ActionBarFragment {
 
@@ -93,6 +95,8 @@ public abstract class CivItemDetailsFragment extends Fragment implements ActionB
             civItemDetailsFragment = new TechnologyDetailsFragment();
         } else if (civItem instanceof GreatPerson) {
             civItemDetailsFragment = new GreatPersonDetailsFragment();
+        } else if (civItem instanceof UnitPromotion) {
+            civItemDetailsFragment = new UnitPromotionDetailsFragment();
         } else {
             throw new UnsupportedOperationException();
         }

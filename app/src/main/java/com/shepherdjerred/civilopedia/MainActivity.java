@@ -176,6 +176,9 @@ public class MainActivity extends AppCompatActivity
                 case R.id.nav_great_people:
                     civItems = datastore.getGreatPeople();
                     break;
+                case R.id.nav_unit_promotions:
+                    civItems = datastore.getUnitPromotions();
+                    break;
             }
 
             if (civItems != null) {

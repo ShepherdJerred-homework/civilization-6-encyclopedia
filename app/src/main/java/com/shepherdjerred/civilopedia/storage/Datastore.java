@@ -19,6 +19,7 @@ import com.shepherdjerred.civilopedia.civitem.route.Route;
 import com.shepherdjerred.civilopedia.civitem.technology.Technology;
 import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
+import com.shepherdjerred.civilopedia.civitem.unit_promotion.UnitPromotion;
 
 import java.util.ArrayList;
 
@@ -62,4 +63,6 @@ public interface Datastore {
     ArrayList<Technology> getTechnologies();
 
     ArrayList<GreatPerson> getGreatPeople();
+
+    ArrayList<UnitPromotion> getUnitPromotions();
 }

@@ -24,6 +24,7 @@ import com.shepherdjerred.civilopedia.civitem.route.Route;
 import com.shepherdjerred.civilopedia.civitem.technology.Technology;
 import com.shepherdjerred.civilopedia.civitem.terrain.Terrain;
 import com.shepherdjerred.civilopedia.civitem.unit.Unit;
+import com.shepherdjerred.civilopedia.civitem.unit_promotion.UnitPromotion;
 import com.shepherdjerred.civilopedia.storage.Datastore;
 
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
     private ArrayList<Civic> civics;
     private ArrayList<Technology> technologies;
     private ArrayList<GreatPerson> greatPeople;
+    private ArrayList<UnitPromotion> unitPromotions;
 
     public SqliteDatastore(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -84,6 +86,7 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             civItems.addAll(getCivics());
             civItems.addAll(getTechnologies());
             civItems.addAll(getGreatPeople());
+            civItems.addAll(getUnitPromotions());
         }
         return civItems;
     }
@@ -238,6 +241,14 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
             loadGreatPeople();
         }
         return greatPeople;
+    }
+
+    @Override
+    public ArrayList<UnitPromotion> getUnitPromotions() {
+        if (unitPromotions == null) {
+            loadUnitPromotions();
+        }
+        return unitPromotions;
     }
 
     private void loadCivilizations() {
@@ -680,6 +691,29 @@ public class SqliteDatastore extends SQLiteAssetHelper implements Datastore {
 
                 GreatPerson greatPerson = new GreatPerson(greatPersonType, name, classType, gender);
                 greatPeople.add(greatPerson);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        sqLiteDatabase.close();
+    }
+
+    private void loadUnitPromotions() {
+        unitPromotions = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        String sql = "SELECT * FROM UnitPromotions ORDER BY Name";
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            do {
+                String unitPromotionType = c.getString(0);
+                String name = localizationDatastore.getEnglishValue(c.getString(1));
+                int level = c.getInt(3);
+                String description = localizationDatastore.getEnglishValue(c.getString(2));
+
+                UnitPromotion unitPromotion = new UnitPromotion(unitPromotionType, name, level, description);
+                unitPromotions.add(unitPromotion);
 
             } while (c.moveToNext());
         }
