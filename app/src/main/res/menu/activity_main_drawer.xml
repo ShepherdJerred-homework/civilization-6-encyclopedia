@@ -8,26 +8,56 @@
             android:id="@+id/nav_home"
             android:title="Home" />
         <item
-            android:id="@+id/nav_civilizations"
-            android:title="Civilizations" />
-        <item
-            android:id="@+id/nav_leaders"
-            android:title="Leaders" />
+            android:id="@+id/nav_buildings"
+            android:title="Buildings" />
         <item
             android:id="@+id/nav_city_states"
             android:title="City States" />
         <item
+            android:id="@+id/nav_civics"
+            android:title="Civics" />
+        <item
+            android:id="@+id/nav_civilizations"
+            android:title="Civilizations" />
+        <item
             android:id="@+id/nav_districts"
             android:title="Districts" />
         <item
-            android:id="@+id/nav_buildings"
-            android:title="Buildings" />
+            android:id="@+id/nav_features"
+            android:title="Features" />
         <item
-            android:id="@+id/nav_wonders"
-            android:title="Wonders" />
+            android:id="@+id/nav_governments"
+            android:title="Governments" />
+        <item
+            android:id="@+id/nav_great_people"
+            android:title="Great People" />
+        <item
+            android:id="@+id/nav_improvements"
+            android:title="Improvements" />
+        <item
+            android:id="@+id/nav_leaders"
+            android:title="Leaders" />
+        <item
+            android:id="@+id/nav_policies"
+            android:title="Policies" />
         <item
             android:id="@+id/nav_projects"
             android:title="Projects" />
+        <item
+            android:id="@+id/nav_religion"
+            android:title="Religions" />
+        <item
+            android:id="@+id/nav_resources"
+            android:title="Resources" />
+        <item
+            android:id="@+id/nav_routes"
+            android:title="Routes" />
+        <item
+            android:id="@+id/nav_technologies"
+            android:title="Technologies" />
+        <item
+            android:id="@+id/nav_terrain"
+            android:title="Terrain" />
         <item
             android:id="@+id/nav_units"
             android:title="Units" />
@@ -35,38 +65,8 @@
             android:id="@+id/nav_unit_promotions"
             android:title="Unit Promotions" />
         <item
-            android:id="@+id/nav_great_people"
-            android:title="Great People" />
-        <item
-            android:id="@+id/nav_technologies"
-            android:title="Technologies" />
-        <item
-            android:id="@+id/nav_civics"
-            android:title="Civics" />
-        <item
-            android:id="@+id/nav_governments"
-            android:title="Governments" />
-        <item
-            android:id="@+id/nav_policies"
-            android:title="Policies" />
-        <item
-            android:id="@+id/nav_religion"
-            android:title="Religions" />
-        <item
-            android:id="@+id/nav_terrain"
-            android:title="Terrain" />
-        <item
-            android:id="@+id/nav_features"
-            android:title="Features" />
-        <item
-            android:id="@+id/nav_resources"
-            android:title="Resources" />
-        <item
-            android:id="@+id/nav_improvements"
-            android:title="Improvements" />
-        <item
-            android:id="@+id/nav_routes"
-            android:title="Routes" />
+            android:id="@+id/nav_wonders"
+            android:title="Wonders" />
     </group>
 
 </menu>

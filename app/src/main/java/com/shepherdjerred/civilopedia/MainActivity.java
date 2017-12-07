@@ -1,5 +1,6 @@
 package com.shepherdjerred.civilopedia;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -7,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.billingclient.api.BillingClient;
 import com.google.android.gms.ads.MobileAds;
@@ -38,6 +41,9 @@ public class MainActivity extends AppCompatActivity
 
     private BillingClient mBillingClient;
     private Datastore datastore;
+    private ArrayList<CivItem> items;
+    private boolean allowShake;
+    private CountDownTimer timer;
 
     /* put this into your activity class */
     private SensorManager mSensorManager;
@@ -47,17 +53,21 @@ public class MainActivity extends AppCompatActivity
 
     private final SensorEventListener mSensorListener = new SensorEventListener() {
 
+        //https://stackoverflow.com/a/2318356
         public void onSensorChanged(SensorEvent se) {
+
             float x = se.values[0];
             float y = se.values[1];
             float z = se.values[2];
             mAccelLast = mAccelCurrent;
-            mAccelCurrent = (float) Math.sqrt((double) (x*x + y*y + z*z));
+            mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
             float delta = mAccelCurrent - mAccelLast;
             mAccel = mAccel * 0.9f + delta; // perform low-cut filter
-            if (mAccel > 5) {
+            if (mAccel > 12 && allowShake) {
+
+                allowShake = false;
+                timer.start();
                 Random random = new Random();
-                ArrayList<CivItem> items = datastore.getCivItems();
                 CivItem civItem = items.get(random.nextInt(items.size()));
                 Fragment fragment = CivItemDetailsFragment.newInstance(civItem);
 
@@ -90,6 +100,22 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //https://stackoverflow.com/a/12842387
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "Loading", "Loading content...");
+        allowShake = true;
+        timer = new CountDownTimer(2000, 1000) {
+            @Override
+            public void onTick(long l) {
+                //ignore
+            }
+
+            @Override
+            public void onFinish() {
+                allowShake = true;
+            }
+        };
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -98,7 +124,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /* do this in onCreate */
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
         mAccel = 0.00f;
@@ -109,7 +134,17 @@ public class MainActivity extends AppCompatActivity
 
         MobileAds.initialize(this, "ca-app-pub-8402769089231334~8559189179");
 
-        datastore = new SqliteDatastore(getApplicationContext());
+        //https://stackoverflow.com/a/10905948
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                datastore = new SqliteDatastore(getApplicationContext());
+                items = datastore.getCivItems();
+                progressDialog.dismiss();
+            }
+        };
+
+        new Thread(runnable).start();
     }
 
     private void setupActionBar() {

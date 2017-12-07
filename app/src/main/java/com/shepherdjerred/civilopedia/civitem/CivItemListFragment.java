@@ -12,6 +12,8 @@ import com.shepherdjerred.civilopedia.ActionBarFragment;
 import com.shepherdjerred.civilopedia.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class CivItemListFragment extends Fragment implements ActionBarFragment {
@@ -38,6 +40,12 @@ public class CivItemListFragment extends Fragment implements ActionBarFragment {
         if (getArguments() != null) {
             civItems = getArguments().getParcelableArrayList(ARG_ITEMS);
             civItemsType = getArguments().getString(ARG_TYPE);
+            Collections.sort(civItems, new Comparator<CivItem>() {
+                @Override
+                public int compare(CivItem civItem, CivItem t1) {
+                    return civItem.getName().compareTo(t1.getName());
+                }
+            });
         }
     }
 
